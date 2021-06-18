@@ -65,6 +65,6 @@ public class Util {
     public static void main(String[] args) throws Exception {
         Util baru = new Util();
         
-        baru.sendEmail("putrosetyoko@webmail.umm.ac.id","E:\\FannySkylark.jpg","Punten email baru");
+        baru.sendEmail("putrosetyoko@webmail.umm.ac.id","E:\\FixedJadwal.jpg","Punten email baru");
     }
 }
