@@ -7,6 +7,7 @@ package Main;
 
 import Mahasiswa.DaftarUjian;
 import Mahasiswa.Proposal;
+import config.connectdb;
 
 /**
  *
