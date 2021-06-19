@@ -18,7 +18,7 @@ import config.connectdb;
 
 
 public class Util {
-    public static void sendEmail(String reception, String directory, String isi ) throws Exception{
+    public static void sendEmail(String reception, String directory, String subjek ) throws Exception{
         Properties properties = new Properties();
         properties.put("mail.smtp.auth","true");
         properties.put("mail.smtp.starttls.enable","true");
@@ -39,24 +39,17 @@ public class Util {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(email));
             message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(reception));
-            message.setSubject("Hi");
+            message.setSubject(subjek);
 
-// This mail has 2 part, the BODY and the embedded image
-            MimeMultipart multipart = new MimeMultipart("related");
-// first part (the html)
-            BodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText(isi);
-// add it
-            multipart.addBodyPart(messageBodyPart);
-// second part (the image)
-            messageBodyPart = new MimeBodyPart();
-            DataSource fds = new FileDataSource(directory);
-            messageBodyPart.setDataHandler(new DataHandler(fds));
-// add image to the multipart
-            multipart.addBodyPart(messageBodyPart);
-// put everything together
+            MimeMultipart multipart = new MimeMultipart();
+
+            MimeBodyPart attachFile = new MimeBodyPart();
+            attachFile.attachFile(directory);
+            
+            multipart.addBodyPart(attachFile);
+            
             message.setContent(multipart);
-// Send the actual HTML message, as big as you like
+            
             Transport.send(message);
             System.out.println("Mail sent successfully!!!");
 

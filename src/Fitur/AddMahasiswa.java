@@ -10,20 +10,20 @@ package Fitur;
  * @author ASUS
  */
 
+import Login.Login;
 import config.connectdb;
-import Admin.Registrasi;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class AddDosen extends javax.swing.JFrame {
+public class AddMahasiswa extends javax.swing.JFrame {
 
     /**
      * Creates new form AddMahasiswa
      */
-    public AddDosen() {
+    public AddMahasiswa() {
         setResizable(false);
         initComponents();
     }
@@ -37,105 +37,88 @@ public class AddDosen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jnamadosen2 = new javax.swing.JTextField();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
-        buttonGroup7 = new javax.swing.ButtonGroup();
-        buttonGroup8 = new javax.swing.ButtonGroup();
-        buttonGroup9 = new javax.swing.ButtonGroup();
-        buttonGroup10 = new javax.swing.ButtonGroup();
-        buttonGroup11 = new javax.swing.ButtonGroup();
-        buttonGroup12 = new javax.swing.ButtonGroup();
-        buttonGroup13 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblNamaDosen = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtnidn = new javax.swing.JTextField();
-        txtnamadosen = new javax.swing.JTextField();
-        txtkodedosen = new javax.swing.JTextField();
-        txtemail = new javax.swing.JTextField();
-        btnkembali = new javax.swing.JButton();
-        btnsubmit = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtnama = new javax.swing.JTextField();
+        txtnim = new javax.swing.JTextField();
         txtjenkel = new javax.swing.JTextField();
-        num = new javax.swing.JTextField();
+        txtnophone = new javax.swing.JTextField();
+        txtemail = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtalamat = new javax.swing.JTextArea();
         txtpassword = new javax.swing.JPasswordField();
+        btnkembali = new javax.swing.JButton();
+        btnsignup = new javax.swing.JButton();
+        num = new javax.swing.JTextField();
 
-        jnamadosen2.setText("Input Nama Dosen");
-        jnamadosen2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jnamadosen2ActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 567));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(800, 400));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
         lblNamaDosen.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         lblNamaDosen.setForeground(new java.awt.Color(255, 255, 255));
-        lblNamaDosen.setText("Add Dosen");
+        lblNamaDosen.setText("Registrasi Mahasiswa");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(287, 287, 287)
                 .addComponent(lblNamaDosen)
-                .addGap(338, 338, 338))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblNamaDosen)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel6.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jLabel6.setText("Nama Dosen");
+        jLabel6.setText("Nama Mahasiswa");
+
+        jLabel8.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel8.setText("NIM");
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel7.setText("Jenis Kelamin");
 
-        jLabel8.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jLabel8.setText("NIDN");
+        jLabel11.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel11.setText("No Phone");
 
         jLabel9.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jLabel9.setText("Email");
+        jLabel9.setText("Alamat");
 
-        jLabel10.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jLabel10.setText("Password");
-
-        jLabel11.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        jLabel11.setText("Kode Dosen");
-
-        txtnidn.addActionListener(new java.awt.event.ActionListener() {
+        txtnama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnidnActionPerformed(evt);
+                txtnamaActionPerformed(evt);
             }
         });
 
-        txtnamadosen.addActionListener(new java.awt.event.ActionListener() {
+        txtnim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnamadosenActionPerformed(evt);
+                txtnimActionPerformed(evt);
             }
         });
 
-        txtkodedosen.addActionListener(new java.awt.event.ActionListener() {
+        txtjenkel.setToolTipText("Jenis Kelamin");
+
+        txtnophone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtkodedosenActionPerformed(evt);
+                txtnophoneActionPerformed(evt);
             }
         });
 
@@ -145,6 +128,16 @@ public class AddDosen extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel12.setText("Email");
+
+        jLabel10.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel10.setText("Password");
+
+        txtalamat.setColumns(20);
+        txtalamat.setRows(5);
+        jScrollPane1.setViewportView(txtalamat);
+
         btnkembali.setText("Kembali");
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,14 +145,12 @@ public class AddDosen extends javax.swing.JFrame {
             }
         });
 
-        btnsubmit.setText("Submit");
-        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnsignup.setText("Sign Up");
+        btnsignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsubmitActionPerformed(evt);
+                btnsignupActionPerformed(evt);
             }
         });
-
-        txtjenkel.setToolTipText("Jenis Kelamin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,12 +158,11 @@ public class AddDosen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addContainerGap()
+                .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnkembali)
-                        .addGap(274, 274, 274)
-                        .addComponent(btnsubmit))
+                    .addComponent(btnkembali)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -180,32 +170,41 @@ public class AddDosen extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel6)
                             .addComponent(jLabel9)
+                            .addComponent(jLabel12)
                             .addComponent(jLabel10))
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtemail, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                            .addComponent(txtnamadosen, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                            .addComponent(txtnidn)
-                            .addComponent(txtkodedosen, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                            .addComponent(txtjenkel)
-                            .addComponent(txtpassword))
-                        .addGap(30, 30, 30)
-                        .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(254, Short.MAX_VALUE))
+                            .addComponent(txtnama)
+                            .addComponent(txtnim)
+                            .addComponent(txtnophone)
+                            .addComponent(txtjenkel, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addComponent(txtpassword))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(551, Short.MAX_VALUE)
+                    .addComponent(btnsignup)
+                    .addGap(180, 180, 180)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtnamadosen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtnidn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -213,74 +212,77 @@ public class AddDosen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(txtkodedosen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnophone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
                     .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(482, Short.MAX_VALUE)
+                    .addComponent(btnsignup, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
-        setSize(new java.awt.Dimension(813, 464));
+        setSize(new java.awt.Dimension(826, 576));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtnidnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnidnActionPerformed
+    private void txtnamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnidnActionPerformed
+    }//GEN-LAST:event_txtnamaActionPerformed
 
-    private void txtnamadosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamadosenActionPerformed
+    private void txtnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnimActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnamadosenActionPerformed
+    }//GEN-LAST:event_txtnimActionPerformed
 
-    private void jnamadosen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnamadosen2ActionPerformed
+    private void txtnophoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnophoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jnamadosen2ActionPerformed
-
-    private void txtkodedosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtkodedosenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtkodedosenActionPerformed
+    }//GEN-LAST:event_txtnophoneActionPerformed
 
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtemailActionPerformed
 
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
-        Registrasi frm = new Registrasi();
+        Login frm = new Login();
         frm.setVisible(true);
         this.setVisible(false);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
 
-    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
-
+    private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
         Connection con = connectdb.tryConnect();
         PreparedStatement ps;
         try{
-            String sql = ("insert into dosen values(?,?,?,?,?,?,?)");
+            String sql = ("insert into mahasiswa values(?,?,?,?,?,?,?,?)");
             ps  = con.prepareStatement(sql);
             ps.setString(1, num.getText());
-            ps.setString(2, txtnidn.getText());
-            ps.setString(3, txtkodedosen.getText());
-            ps.setString(4, txtnamadosen.getText());
-            ps.setString(5, txtjenkel.getText());
-            ps.setString(6, txtemail.getText());
-            ps.setString(7, txtpassword.getText());
+            ps.setString(2, txtnim.getText());
+            ps.setString(3, txtnama.getText());
+            ps.setString(4, txtjenkel.getText());
+            ps.setString(5, txtalamat.getText());
+            ps.setString(6, txtnophone.getText());
+            ps.setString(7, txtemail.getText());
+            ps.setString(8, txtpassword.getText());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data Inserted");
         }catch(HeadlessException | SQLException ex){
             JOptionPane.showMessageDialog(null, "Data not Inserted");
         }
-    }//GEN-LAST:event_btnsubmitActionPerformed
+    }//GEN-LAST:event_btnsignupActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,58 +301,47 @@ public class AddDosen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddDosen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddDosen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddDosen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddDosen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-         
+            
             @Override
             public void run() {
-                new AddDosen().setVisible(true);
+                new AddMahasiswa().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnkembali;
-    private javax.swing.JButton btnsubmit;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup10;
-    private javax.swing.ButtonGroup buttonGroup11;
-    private javax.swing.ButtonGroup buttonGroup12;
-    private javax.swing.ButtonGroup buttonGroup13;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.ButtonGroup buttonGroup6;
-    private javax.swing.ButtonGroup buttonGroup7;
-    private javax.swing.ButtonGroup buttonGroup8;
-    private javax.swing.ButtonGroup buttonGroup9;
+    private javax.swing.JButton btnsignup;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jnamadosen2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNamaDosen;
     private javax.swing.JTextField num;
+    private javax.swing.JTextArea txtalamat;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtjenkel;
-    private javax.swing.JTextField txtkodedosen;
-    private javax.swing.JTextField txtnamadosen;
-    private javax.swing.JTextField txtnidn;
+    private javax.swing.JTextField txtnama;
+    private javax.swing.JTextField txtnim;
+    private javax.swing.JTextField txtnophone;
     private javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }

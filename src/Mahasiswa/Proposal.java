@@ -273,8 +273,9 @@ public class Proposal extends javax.swing.JFrame {
                ps.setString(4, txtemail.getText());
                ps.executeUpdate();
                JOptionPane.showMessageDialog(null, "Data Inserted");
-               Util.sendEmail(txtemail.getText(), cv, "Ini adalah cv");
-               Util.sendEmail(txtemail.getText(), portfolio, "Ini adalah portfolio");
+               Util.sendEmail(txtemail.getText(), cv, "Curiculum Vitae");
+               Util.sendEmail(txtemail.getText(), portfolio, "Portfolio");
+              
            }catch(Exception ex){
                JOptionPane.showMessageDialog(null, "Data not Inserted");
            }

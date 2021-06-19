@@ -10,6 +10,7 @@ package Admin;
  * @author ASUS
  */
 
+import Fitur.AddAdmin;
 import Fitur.AddDosen;
 import config.connectdb;
 
@@ -136,7 +137,7 @@ public class Registrasi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnadddosenActionPerformed
 
     private void btnaddadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddadminActionPerformed
-        PenjadwalanUjian frm = new PenjadwalanUjian();
+        AddAdmin frm = new AddAdmin();
         frm.setVisible(true);
         this.setVisible(false);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -172,6 +173,7 @@ public class Registrasi extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Registrasi().setVisible(true);
             }
