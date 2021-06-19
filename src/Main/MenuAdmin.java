@@ -9,6 +9,7 @@ import Admin.Approval;
 import Admin.NilaiPKN;
 import Admin.PenjadwalanUjian;
 import Admin.Registrasi;
+import Login.Login;
 import config.connectdb;
 
 /**
@@ -36,6 +37,7 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblNamaDosen = new javax.swing.JLabel();
+        btnlogout = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnapproval = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -54,6 +56,13 @@ public class MenuAdmin extends javax.swing.JFrame {
         lblNamaDosen.setForeground(new java.awt.Color(255, 255, 255));
         lblNamaDosen.setText("ADMIN");
 
+        btnlogout.setText("Log Out");
+        btnlogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -61,13 +70,17 @@ public class MenuAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNamaDosen)
-                .addContainerGap(716, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnlogout)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblNamaDosen)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNamaDosen)
+                    .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -185,7 +198,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 448, Short.MAX_VALUE))
+                .addGap(0, 442, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(816, 614));
@@ -223,6 +236,14 @@ public class MenuAdmin extends javax.swing.JFrame {
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_btnregisActionPerformed
+
+    private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
+        Login frm = new Login();
+        frm.setVisible(true);
+        this.setVisible(false);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btnlogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +283,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnapproval;
     private javax.swing.JButton btnjadwalujian;
+    private javax.swing.JButton btnlogout;
     private javax.swing.JButton btnnilaipkn;
     private javax.swing.JButton btnregis;
     private javax.swing.JLabel jLabel4;
