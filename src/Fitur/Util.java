@@ -1,5 +1,5 @@
 
-package Main;
+package Fitur;
 
 import java.util.Properties;
 import javax.activation.DataHandler;
