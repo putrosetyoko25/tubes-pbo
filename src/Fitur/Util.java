@@ -18,7 +18,7 @@ import config.connectdb;
 
 
 public class Util {
-    public void sendEmail(String reception, String directory, String isi ) throws Exception{
+    public static void sendEmail(String reception, String directory, String isi ) throws Exception{
         Properties properties = new Properties();
         properties.put("mail.smtp.auth","true");
         properties.put("mail.smtp.starttls.enable","true");
@@ -62,10 +62,5 @@ public class Util {
 
         
     }
-    
-    public static void main(String[] args) throws Exception {
-        Util baru = new Util();
-        
-        baru.sendEmail("putrosetyoko@webmail.umm.ac.id","E:\\FixedJadwal.jpg","Punten email baru");
-    }
+
 }
