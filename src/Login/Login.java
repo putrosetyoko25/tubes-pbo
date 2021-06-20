@@ -7,6 +7,10 @@ package Login;
 
 import Fitur.AddMahasiswa;
 import config.connectdb;
+import Main.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -151,7 +155,77 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsignupActionPerformed
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
-        // TODO add your handling code here:
+        Connection con = connectdb.tryConnect();
+        try {
+            java.sql.Statement stat = con.createStatement();
+            ResultSet result=stat.executeQuery ("select * from mahasiswa where "
+                    + "nim='" +txtusername.getText()+"'");
+            if (result.next()) {
+                if (txtpassword.getText().equals(result.getString("password"))){
+                JOptionPane.showMessageDialog(null, "Login Berhasil");
+                    MenuMahasiswa frm = new MenuMahasiswa();
+                    frm.setVisible(true);
+                    this.setVisible(false);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
+                } else {
+                        JOptionPane.showMessageDialog(rootPane,"Password Salah");
+                        txtpassword.setText("");
+                        txtusername.requestFocus();
+                }
+            } else {
+                
+                result=stat.executeQuery ("select * from dosen where "
+                    + "email='" +txtusername.getText()+"'");
+                
+                if (result.next()) {
+                if (txtpassword.getText().equals(result.getString("password"))){
+                JOptionPane.showMessageDialog(null, "Login Berhasil");
+                    MenuDosen frm = new MenuDosen();
+                    frm.setVisible(true);
+                    this.setVisible(false);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
+                } else {
+                        JOptionPane.showMessageDialog(rootPane,"Password Salah");
+                        txtpassword.setText("");
+                        txtusername.requestFocus();
+                }
+            } else {
+                    
+                    result=stat.executeQuery ("select * from admin where "
+                    + "username='" +txtusername.getText()+"'");
+                    
+                    if (result.next()) {
+                if (txtpassword.getText().equals(result.getString("password"))){
+                JOptionPane.showMessageDialog(null, "Login Berhasil");
+                
+                    MenuAdmin frm = new MenuAdmin();
+                    frm.setVisible(true);
+                    this.setVisible(false);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
+                
+                } else {
+                        JOptionPane.showMessageDialog(rootPane,"Password Salah");
+                        txtpassword.setText("");
+                        txtusername.requestFocus();
+                }
+            } else {
+                        JOptionPane.showMessageDialog(rootPane, "User Tidak Ditemukan");
+                txtusername.setText("");
+                txtpassword.setText("");
+                txtusername.requestFocus();
+                    }
+                    
+                }
+                
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Gagal");
+        }
+        
+        
     }//GEN-LAST:event_btnloginActionPerformed
 
     /**
@@ -183,6 +257,7 @@ public class Login extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            
             @Override
             public void run() {
                 new Login().setVisible(true);
