@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMultipart;
 import config.connectdb;
 
 
-public class Util {
+public class SendMail {
     public static void sendEmail(String reception, String directory, String subjek ) throws Exception{
         Properties properties = new Properties();
         properties.put("mail.smtp.auth","true");
