@@ -150,16 +150,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("D:\\URGENT\\SMK Negeri 7 Samarinda\\Kelas XII\\PBO\\Aplikasi Pembayaran SPP\\Pembayaran_SPP\\Pembayaran_SPP\\Resources\\btnmaximize.png")); // NOI18N
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
             }
         });
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("D:\\URGENT\\SMK Negeri 7 Samarinda\\Kelas XII\\PBO\\Aplikasi Pembayaran SPP\\Pembayaran_SPP\\Pembayaran_SPP\\Resources\\btnminimize.png")); // NOI18N
-
-        jLabel9.setIcon(new javax.swing.ImageIcon("D:\\URGENT\\SMK Negeri 7 Samarinda\\Kelas XII\\PBO\\Aplikasi Pembayaran SPP\\Pembayaran_SPP\\Pembayaran_SPP\\Resources\\btnclose.png")); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
@@ -240,6 +236,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("SISTEM PKN");
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -256,8 +253,6 @@ public class Login extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 6, Short.MAX_VALUE)
         );
-
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\xampp\\htdocs\\siakad-icampus\\public\\img\\logoumm.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

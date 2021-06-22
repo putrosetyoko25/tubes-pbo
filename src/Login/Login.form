@@ -340,28 +340,13 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\URGENT\SMK Negeri 7 Samarinda\Kelas XII\PBO\Aplikasi Pembayaran SPP\Pembayaran_SPP\Pembayaran_SPP\Resources\btnmaximize.png"/>
-                </Property>
-              </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel7MouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\URGENT\SMK Negeri 7 Samarinda\Kelas XII\PBO\Aplikasi Pembayaran SPP\Pembayaran_SPP\Pembayaran_SPP\Resources\btnminimize.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\URGENT\SMK Negeri 7 Samarinda\Kelas XII\PBO\Aplikasi Pembayaran SPP\Pembayaran_SPP\Pembayaran_SPP\Resources\btnclose.png"/>
-                </Property>
-              </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel9MouseClicked"/>
               </Events>
@@ -376,6 +361,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="SISTEM PKN"/>
           </Properties>
         </Component>
@@ -406,11 +392,6 @@
           </Layout>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel6">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\xampp\htdocs\siakad-icampus\public\img\logoumm.png"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
