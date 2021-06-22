@@ -7,6 +7,9 @@ package Mahasiswa;
 
 import Main.MenuMahasiswa;
 import config.connectdb;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,6 +17,9 @@ import config.connectdb;
  */
 public class DaftarUjian extends javax.swing.JFrame {
 
+    
+    String uploadNilai;
+    String uploadLaporan;
     /**
      * Creates new form DaftarUjian
      */
@@ -44,6 +50,10 @@ public class DaftarUjian extends javax.swing.JFrame {
         btnsubmit1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        btnfilenilai1 = new javax.swing.JButton();
+        txtfilenilai = new javax.swing.JTextField();
+        txtfilelaporan = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -95,9 +105,20 @@ public class DaftarUjian extends javax.swing.JFrame {
         jLabel8.setText("Upload Nilai");
 
         btnfilenilai.setText("Input File");
+        btnfilenilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfilenilaiActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel10.setText("Input Nilai");
+
+        txtnilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnilaiActionPerformed(evt);
+            }
+        });
 
         btnsubmit.setText("Submit");
         btnsubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +157,16 @@ public class DaftarUjian extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel12.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        jLabel12.setText("Upload Laporan");
+
+        btnfilenilai1.setText("Input File");
+        btnfilenilai1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfilenilai1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -146,26 +177,38 @@ public class DaftarUjian extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10))
-                        .addGap(85, 85, 85)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtnilai)
-                            .addComponent(btnfilenilai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 118, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnsubmit1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnsubmit)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtfilelaporan, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnfilenilai1))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtfilenilai)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnfilenilai)))
+                        .addGap(59, 59, 59))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtnilai, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,19 +216,28 @@ public class DaftarUjian extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(158, 158, 158))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
+                            .addComponent(txtfilenilai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnfilenilai))
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel10))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(txtnilai, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel10))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtnilai, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(btnfilenilai1)
+                            .addComponent(txtfilelaporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsubmit1)
                     .addComponent(btnsubmit))
@@ -221,7 +273,9 @@ public class DaftarUjian extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +285,7 @@ public class DaftarUjian extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(501, 418));
+        setSize(new java.awt.Dimension(684, 579));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -244,8 +298,47 @@ public class DaftarUjian extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsubmit1ActionPerformed
 
     private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
-        // TODO add your handling code here:
+        System.out.println(txtnilai.getText());
+        
     }//GEN-LAST:event_btnsubmitActionPerformed
+
+    private void btnfilenilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfilenilaiActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("Pdf file(.pdf)", "pdf");
+         fileChooser.addChoosableFileFilter(filter);
+         int result = fileChooser.showSaveDialog(null);
+         if(result == JFileChooser.APPROVE_OPTION){
+             File selectedFile = fileChooser.getSelectedFile();
+             uploadNilai = selectedFile.getAbsolutePath();
+             txtfilenilai.setText(uploadNilai);
+             txtfilenilai.setEditable(false);
+              }
+         else if(result == JFileChooser.CANCEL_OPTION){
+             System.out.println("Tidak ada yang di pilih.");
+         }
+    }//GEN-LAST:event_btnfilenilaiActionPerformed
+
+    private void txtnilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnilaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnilaiActionPerformed
+
+    private void btnfilenilai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfilenilai1ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("Pdf file(.pdf)", "pdf");
+         fileChooser.addChoosableFileFilter(filter);
+         int result = fileChooser.showSaveDialog(null);
+         if(result == JFileChooser.APPROVE_OPTION){
+             File selectedFile = fileChooser.getSelectedFile();
+             uploadLaporan = selectedFile.getAbsolutePath();
+             txtfilelaporan.setText(uploadLaporan);
+             txtfilelaporan.setEditable(false);
+              }
+         else if(result == JFileChooser.CANCEL_OPTION){
+             System.out.println("Tidak ada yang di pilih.");
+         }
+    }//GEN-LAST:event_btnfilenilai1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,11 +377,13 @@ public class DaftarUjian extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnfilenilai;
+    private javax.swing.JButton btnfilenilai1;
     private javax.swing.JButton btnsubmit;
     private javax.swing.JButton btnsubmit1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -297,6 +392,8 @@ public class DaftarUjian extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField txtfilelaporan;
+    private javax.swing.JTextField txtfilenilai;
     private javax.swing.JTextField txtnilai;
     // End of variables declaration//GEN-END:variables
 }

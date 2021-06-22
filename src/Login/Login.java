@@ -9,8 +9,10 @@ import Fitur.AddMahasiswa;
 import config.connectdb;
 import Main.*;
 import java.awt.Frame;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
@@ -370,8 +372,7 @@ public class Login extends javax.swing.JFrame {
                 }
                 
             }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane, "Gagal");
+        } catch (HeadlessException | SQLException e){
         }
         
         

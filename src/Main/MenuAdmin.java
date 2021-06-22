@@ -47,19 +47,15 @@ public class MenuAdmin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnregis = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
         lblNamaDosen.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         lblNamaDosen.setForeground(new java.awt.Color(255, 255, 255));
         lblNamaDosen.setText("ADMIN");
 
-        btnlogout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnlogout.setForeground(new java.awt.Color(153, 0, 0));
         btnlogout.setText("Log Out");
         btnlogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,14 +80,14 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNamaDosen)
-                    .addComponent(btnlogout))
+                    .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         btnapproval.setBackground(new java.awt.Color(255, 255, 255));
-        btnapproval.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red/ok-24.png"))); // NOI18N
+        btnapproval.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check-mark-11-24.png"))); // NOI18N
         btnapproval.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnapprovalActionPerformed(evt);
@@ -105,7 +101,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         jLabel5.setText("Penjadwalan Ujian");
 
         btnjadwalujian.setBackground(new java.awt.Color(255, 255, 255));
-        btnjadwalujian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red/add-list-24.png"))); // NOI18N
+        btnjadwalujian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-list-24.png"))); // NOI18N
         btnjadwalujian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnjadwalujianActionPerformed(evt);
@@ -113,7 +109,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
 
         btnnilaipkn.setBackground(new java.awt.Color(255, 255, 255));
-        btnnilaipkn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red/edit-9-24.png"))); // NOI18N
+        btnnilaipkn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pen.png"))); // NOI18N
         btnnilaipkn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnilaipknActionPerformed(evt);
@@ -124,7 +120,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         jLabel6.setText("Nilai PKN");
 
         btnregis.setBackground(new java.awt.Color(255, 255, 255));
-        btnregis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red/add-user-3-24.png"))); // NOI18N
+        btnregis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-user-3-24.png"))); // NOI18N
         btnregis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnregisActionPerformed(evt);
@@ -155,7 +151,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addComponent(btnregis, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,36 +185,12 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(153, 0, 0));
-
-        jLabel8.setFont(new java.awt.Font("NewsGoth Lt BT", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("UMM - 2021");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(361, 361, 361)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,8 +198,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 442, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(816, 614));
@@ -319,10 +290,8 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblNamaDosen;
     // End of variables declaration//GEN-END:variables
 }
