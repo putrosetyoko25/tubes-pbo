@@ -135,6 +135,11 @@ public class Login extends javax.swing.JFrame {
                 btnloginActionPerformed(evt);
             }
         });
+        btnlogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnloginKeyPressed(evt);
+            }
+        });
         jPanel1.add(btnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 365, 226, 35));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
@@ -241,6 +246,52 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnloginActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        AddMahasiswa frm = new AddMahasiswa();
+        frm.setVisible(true);
+        this.setVisible(false);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void checkboxpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxpasswordActionPerformed
+        if(checkboxpassword.isSelected()){
+            txtpassword.setEchoChar((char)0);
+        } else {
+            txtpassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkboxpasswordActionPerformed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        setState(Login.ICONIFIED);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        Object[] options = {"Iya","Batal"};
+        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin keluar?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
+        if(n == JOptionPane.YES_OPTION){
+            dispose();
+        }
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        setState(Login.ICONIFIED);
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        Object[] options = {"Iya","Batal"};
+        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin keluar?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
+        if(n == JOptionPane.YES_OPTION){
+            dispose();
+        }
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void btnloginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnloginKeyPressed
         Connection con = connectdb.tryConnect();
         try {
             java.sql.Statement stat = con.createStatement();
@@ -309,49 +360,7 @@ public class Login extends javax.swing.JFrame {
             }
         } catch (HeadlessException | SQLException e){
         }
-        
-        
-    }//GEN-LAST:event_btnloginActionPerformed
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        AddMahasiswa frm = new AddMahasiswa();
-        frm.setVisible(true);
-        this.setVisible(false);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void checkboxpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxpasswordActionPerformed
-        if(checkboxpassword.isSelected()){
-            txtpassword.setEchoChar((char)0);
-        } else {
-            txtpassword.setEchoChar('*');
-        }
-    }//GEN-LAST:event_checkboxpasswordActionPerformed
-
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        setState(Login.ICONIFIED);
-    }//GEN-LAST:event_jLabel7MouseClicked
-
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        Object[] options = {"Iya","Batal"};
-        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin keluar?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
-        if(n == JOptionPane.YES_OPTION){
-            dispose();
-        }
-    }//GEN-LAST:event_jLabel9MouseClicked
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        setState(Login.ICONIFIED);
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        Object[] options = {"Iya","Batal"};
-        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin keluar?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
-        if(n == JOptionPane.YES_OPTION){
-            dispose();
-        }
-    }//GEN-LAST:event_jLabel12MouseClicked
+    }//GEN-LAST:event_btnloginKeyPressed
 
     /**
      * @param args the command line arguments
