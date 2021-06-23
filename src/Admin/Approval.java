@@ -11,6 +11,7 @@ import Main.MenuAdmin;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -36,6 +37,7 @@ public class Approval extends javax.swing.JFrame {
     
     public void TampilData() {
         tableapproval = new DefaultTableModel();
+        tableapproval.addColumn("ID");
         tableapproval.addColumn("NIM");
         tableapproval.addColumn("NAMA MAHASISWA");
         tableapproval.addColumn("EMAIL");
@@ -47,9 +49,10 @@ public class Approval extends javax.swing.JFrame {
             java.sql.ResultSet res = stmt.executeQuery(SQL);
             while (res.next()) {
                 tableapproval.addRow(new Object[]{
+                    res.getString("id_proposal"),
                     res.getString("nim"),
                     res.getString("nama"),
-                    res.getString("email")
+                    res.getString("email"),
                 });
             }
         } catch (SQLException e) {
@@ -77,7 +80,7 @@ public class Approval extends javax.swing.JFrame {
         cari = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btndecline = new javax.swing.JButton();
-        btnsubmit = new javax.swing.JButton();
+        btnapprove = new javax.swing.JButton();
         txtidproposal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -149,10 +152,10 @@ public class Approval extends javax.swing.JFrame {
             }
         });
 
-        btnsubmit.setText("Approve");
-        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnapprove.setText("Approve");
+        btnapprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsubmitActionPerformed(evt);
+                btnapproveActionPerformed(evt);
             }
         });
 
@@ -164,6 +167,21 @@ public class Approval extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnkembali)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btndecline)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnapprove))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(295, 295, 295)
@@ -172,23 +190,8 @@ public class Approval extends javax.swing.JFrame {
                                 .addComponent(btnreceive, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(txtidproposal, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 296, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnkembali)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btndecline)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnsubmit))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addComponent(txtidproposal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 296, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -211,7 +214,7 @@ public class Approval extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btndecline, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnapprove, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -236,37 +239,40 @@ public class Approval extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btndeclineActionPerformed
 
-    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
+    private void btnapproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnapproveActionPerformed
         try {
             Connection conn = connectdb.tryConnect();
-            PreparedStatement stmt = conn.prepareStatement("update proposal set status=? where id_proposal=?");
-            stmt.setString(4, txtidproposal.getText());
+            PreparedStatement stmt = conn.prepareStatement("update proposal set status='Approve' where id_proposal='"+txtidproposal.getText()+"'");
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             TampilData();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_btnsubmitActionPerformed
+    }//GEN-LAST:event_btnapproveActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         
         int baris = table.getSelectedRow(); 
-        nim = tableapproval.getValueAt(baris, 0).toString();
+        id_proposal = tableapproval.getValueAt(baris, 0).toString();
+        txtidproposal.setText(tableapproval.getValueAt(baris, 0).toString());
         
-        Connection conn = connectdb.tryConnect();
+        /*Connection conn = connectdb.tryConnect();
+       
         try {
-            java.sql.Statement stmt = conn.createStatement();
-            SQL = "select id_proposal where nim" + nim;
-            java.sql.ResultSet res = stmt.executeQuery(SQL);
+            java.sql.Statement stat = conn.createStatement();
+            ResultSet result=stat.executeQuery("select id_proposal from mahasiswa where nim='" + nim +"'");
+            java.sql.ResultSet res = stat.executeQuery(SQL);
             while (res.next()) {
                 tableapproval.addRow(new Object[]{
                     res.getString("nim"),
                 });
+
+               
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
         
         
         //nama = tableapproval.getValueAt(baris, 1).toString();
@@ -311,10 +317,10 @@ public class Approval extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnapprove;
     private javax.swing.JButton btndecline;
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnreceive;
-    private javax.swing.JButton btnsubmit;
     private javax.swing.JTextField cari;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
