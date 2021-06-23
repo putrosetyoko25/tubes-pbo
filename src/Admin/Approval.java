@@ -4,15 +4,22 @@
  * and open the template in the editor.
  */
 package Admin;
+
 import config.connectdb;
 import Fitur.*;
 import Main.MenuAdmin;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
  * @author H P
  */
 public class Approval extends javax.swing.JFrame {
+    
+    private DefaultTableModel tabelapproval;
+    private String SQL; 
 
     /**
      * Creates new form Approval
@@ -20,7 +27,32 @@ public class Approval extends javax.swing.JFrame {
     public Approval() {
         setResizable(false);
         initComponents();
+        this.TampilData();
     }
+    
+    public void TampilData() {
+        tabelapproval = new DefaultTableModel();
+        tabelapproval.addColumn("NIM");
+        tabelapproval.addColumn("NAMA MAHASISWA");
+        tabelapproval.addColumn("EMAIL");
+        table.setModel(tabelapproval);
+        Connection conn = connectdb.tryConnect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            SQL = "select * from mahasiswa";
+            java.sql.ResultSet res = stmt.executeQuery(SQL);
+            while (res.next()) {
+                tabelapproval.addRow(new Object[]{
+                    res.getString("nim"),
+                    res.getString("nama"),
+                    res.getString("email")
+                });
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,6 +68,12 @@ public class Approval extends javax.swing.JFrame {
         btnreceive = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnkembali = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        cari = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        btndecline = new javax.swing.JButton();
+        btnsubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,23 +117,64 @@ public class Approval extends javax.swing.JFrame {
             }
         });
 
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
+
+        jLabel3.setText("Cari Mahasiswa");
+
+        btndecline.setText("Decline");
+        btndecline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeclineActionPerformed(evt);
+            }
+        });
+
+        btnsubmit.setText("Submit");
+        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsubmitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addGap(295, 295, 295)
+                .addComponent(jLabel2)
+                .addGap(52, 52, 52)
                 .addComponent(btnreceive, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(270, 270, 270))
+                .addContainerGap(306, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnkembali)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnkembali)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btndecline)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnsubmit))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +184,17 @@ public class Approval extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnreceive, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
-                .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btndecline, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -126,6 +214,14 @@ public class Approval extends javax.swing.JFrame {
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
+
+    private void btndeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeclineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btndeclineActionPerformed
+
+    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnsubmitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,10 +259,16 @@ public class Approval extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btndecline;
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnreceive;
+    private javax.swing.JButton btnsubmit;
+    private javax.swing.JTextField cari;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
