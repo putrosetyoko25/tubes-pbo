@@ -27,6 +27,15 @@ public class AddMahasiswa extends javax.swing.JFrame {
         setResizable(false);
         initComponents();
     }
+    
+    public void clear(){
+        txtnama.setText("");
+        txtnim.setText("");
+        txtnophone.setText("");
+        txtemail.setText("");
+        txtalamat.setText("");
+        txtpassword.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +56,6 @@ public class AddMahasiswa extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtnama = new javax.swing.JTextField();
         txtnim = new javax.swing.JTextField();
-        txtjenkel = new javax.swing.JTextField();
         txtnophone = new javax.swing.JTextField();
         txtemail = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -57,9 +65,9 @@ public class AddMahasiswa extends javax.swing.JFrame {
         txtpassword = new javax.swing.JPasswordField();
         btnkembali = new javax.swing.JButton();
         btnsignup = new javax.swing.JButton();
-        num = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        cmbjenkel = new javax.swing.JComboBox<>();
 
         jLabel1.setText("jLabel1");
 
@@ -115,8 +123,6 @@ public class AddMahasiswa extends javax.swing.JFrame {
                 txtnimActionPerformed(evt);
             }
         });
-
-        txtjenkel.setToolTipText("Jenis Kelamin");
 
         txtnophone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +183,8 @@ public class AddMahasiswa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        cmbjenkel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,29 +194,24 @@ public class AddMahasiswa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel10))
-                                .addGap(75, 75, 75)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtemail)
-                                    .addComponent(txtnama)
-                                    .addComponent(txtnim)
-                                    .addComponent(txtnophone)
-                                    .addComponent(txtjenkel)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel10))
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtemail)
+                            .addComponent(txtnama)
+                            .addComponent(txtnim)
+                            .addComponent(txtnophone)
+                            .addComponent(jScrollPane1)
+                            .addComponent(txtpassword, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(cmbjenkel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 57, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -221,9 +224,7 @@ public class AddMahasiswa extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,7 +235,9 @@ public class AddMahasiswa extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(txtjenkel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbjenkel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -255,7 +258,7 @@ public class AddMahasiswa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsignup)
                     .addComponent(btnkembali))
@@ -295,18 +298,18 @@ public class AddMahasiswa extends javax.swing.JFrame {
         Connection con = connectdb.tryConnect();
         PreparedStatement ps;
         try{
-            String sql = ("insert into mahasiswa values(?,?,?,?,?,?,?,?)");
+            String sql = ("insert into mahasiswa values(?,?,?,?,?,?,?)");
             ps  = con.prepareStatement(sql);
-            ps.setString(1, num.getText());
-            ps.setString(2, txtnim.getText());
-            ps.setString(3, txtnama.getText());
-            ps.setString(4, txtjenkel.getText());
-            ps.setString(5, txtalamat.getText());
-            ps.setString(6, txtnophone.getText());
-            ps.setString(7, txtemail.getText());
-            ps.setString(8, txtpassword.getText());
+            ps.setString(1, txtnim.getText());
+            ps.setString(2, txtnama.getText());
+            ps.setString(3, (String) cmbjenkel.getSelectedItem());
+            ps.setString(4, txtalamat.getText());
+            ps.setString(5, txtnophone.getText());
+            ps.setString(6, txtemail.getText());
+            ps.setString(7, txtpassword.getText());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data Inserted");
+            clear();
         }catch(HeadlessException | SQLException ex){
             JOptionPane.showMessageDialog(null, "Data not Inserted");
         }
@@ -352,6 +355,7 @@ public class AddMahasiswa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnsignup;
+    private javax.swing.JComboBox<String> cmbjenkel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -365,10 +369,8 @@ public class AddMahasiswa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNamaDosen;
-    private javax.swing.JTextField num;
     private javax.swing.JTextArea txtalamat;
     private javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtjenkel;
     private javax.swing.JTextField txtnama;
     private javax.swing.JTextField txtnim;
     private javax.swing.JTextField txtnophone;

@@ -29,6 +29,17 @@ public class Proposal extends javax.swing.JFrame {
 
     String cv;
     String portfolio;
+    
+    private String nim;
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+    
     public Proposal() {
         setResizable(false);
         initComponents();
@@ -304,16 +315,17 @@ public class Proposal extends javax.swing.JFrame {
         Connection con = connectdb.tryConnect();
         PreparedStatement ps;
         try{
-               String sql = ("insert into proposal values(?,?,?,?,?,?)");
+               String sql = ("insert into proposal values(?,?,?,?,?,?,?)");
                ps  = con.prepareStatement(sql);
                InputStream is1 = new FileInputStream(new File(cv));
                InputStream is2 = new FileInputStream(new File(portfolio));
                ps.setString(1, txtidproposal.getText());
-               ps.setBlob(2,is1);
-               ps.setBlob(3,is2);
-               ps.setString(4, txtemail.getText());
-               ps.setString(5, txttempatpkn.getText());
-               ps.setString(6, jwaktupkn.getDateFormatString());
+               ps.setString(2, getNim());
+               ps.setBlob(3,is1);
+               ps.setBlob(4,is2);
+               ps.setString(5, txtemail.getText());
+               ps.setString(6, txttempatpkn.getText());
+               ps.setString(7, jwaktupkn.getDateFormatString());
                
                
                ps.executeUpdate();

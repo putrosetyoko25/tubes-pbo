@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import Mahasiswa.Proposal;
 
 /**
  *
@@ -22,6 +23,7 @@ import javax.swing.border.LineBorder;
  */
 public class Login extends javax.swing.JFrame {
     
+    Proposal prpsl = new Proposal();
     
     /**
      * Creates new form Login
@@ -247,6 +249,75 @@ public class Login extends javax.swing.JFrame {
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         
+        Connection con = connectdb.tryConnect();
+        try {
+            java.sql.Statement stat = con.createStatement();
+            ResultSet result=stat.executeQuery ("select * from mahasiswa where "
+                    + "nim='" +txtusername.getText()+"'");
+            if (result.next()) {
+                if (txtpassword.getText().equals(result.getString("password"))){
+                JOptionPane.showMessageDialog(null, "Login Berhasil");
+                    prpsl.setNim(txtusername.getText());
+                    MenuMahasiswa frm = new MenuMahasiswa();
+                    frm.setVisible(true);
+                    this.setVisible(false);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
+                } else {
+                        JOptionPane.showMessageDialog(rootPane,"Password Salah");
+                        txtpassword.setText("");
+                        txtusername.requestFocus();
+                }
+            } else {
+                
+                result=stat.executeQuery ("select * from dosen where "
+                    + "email='" +txtusername.getText()+"'");
+                
+                if (result.next()) {
+                if (txtpassword.getText().equals(result.getString("password"))){
+                JOptionPane.showMessageDialog(null, "Login Berhasil");
+                    MenuDosen frm = new MenuDosen();
+                    frm.setVisible(true);
+                    this.setVisible(false);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
+                } else {
+                        JOptionPane.showMessageDialog(rootPane,"Password Salah");
+                        txtpassword.setText("");
+                        txtusername.requestFocus();
+                }
+            } else {
+                    
+                    result=stat.executeQuery ("select * from admin where "
+                    + "username='" +txtusername.getText()+"'");
+                    
+                    if (result.next()) {
+                if (txtpassword.getText().equals(result.getString("password"))){
+                JOptionPane.showMessageDialog(null, "Login Berhasil");
+                
+                    MenuAdmin frm = new MenuAdmin();
+                    frm.setVisible(true);
+                    this.setVisible(false);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
+                
+                } else {
+                        JOptionPane.showMessageDialog(rootPane,"Password Salah");
+                        txtpassword.setText("");
+                        txtusername.requestFocus();
+                }
+            } else {
+                        JOptionPane.showMessageDialog(rootPane, "User Tidak Ditemukan");
+                txtusername.setText("");
+                txtpassword.setText("");
+                txtusername.requestFocus();
+                    }
+                    
+                }
+                
+            }
+        } catch (HeadlessException | SQLException e){
+        }    
         
         
     }//GEN-LAST:event_btnloginActionPerformed
@@ -300,6 +371,7 @@ public class Login extends javax.swing.JFrame {
             if (result.next()) {
                 if (txtpassword.getText().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
+                prpsl.setNim(txtusername.getText());
                     MenuMahasiswa frm = new MenuMahasiswa();
                     frm.setVisible(true);
                     this.setVisible(false);
