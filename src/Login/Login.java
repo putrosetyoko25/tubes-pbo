@@ -10,12 +10,16 @@ import config.connectdb;
 import Main.*;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
-import Mahasiswa.Proposal;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +27,6 @@ import Mahasiswa.Proposal;
  */
 public class Login extends javax.swing.JFrame {
     
-    Proposal prpsl = new Proposal();
     
     /**
      * Creates new form Login
@@ -257,7 +260,7 @@ public class Login extends javax.swing.JFrame {
             if (result.next()) {
                 if (txtpassword.getText().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
-                    prpsl.setNim(txtusername.getText());
+                    mhslogin(result);
                     MenuMahasiswa frm = new MenuMahasiswa();
                     frm.setVisible(true);
                     this.setVisible(false);
@@ -276,6 +279,7 @@ public class Login extends javax.swing.JFrame {
                 if (result.next()) {
                 if (txtpassword.getText().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
+                    dsnlogin(result);
                     MenuDosen frm = new MenuDosen();
                     frm.setVisible(true);
                     this.setVisible(false);
@@ -317,7 +321,9 @@ public class Login extends javax.swing.JFrame {
                 
             }
         } catch (HeadlessException | SQLException e){
-        }    
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         
         
     }//GEN-LAST:event_btnloginActionPerformed
@@ -371,7 +377,7 @@ public class Login extends javax.swing.JFrame {
             if (result.next()) {
                 if (txtpassword.getText().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
-                prpsl.setNim(txtusername.getText());
+                    mhslogin(result);
                     MenuMahasiswa frm = new MenuMahasiswa();
                     frm.setVisible(true);
                     this.setVisible(false);
@@ -390,6 +396,7 @@ public class Login extends javax.swing.JFrame {
                 if (result.next()) {
                 if (txtpassword.getText().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
+                    dsnlogin(result);
                     MenuDosen frm = new MenuDosen();
                     frm.setVisible(true);
                     this.setVisible(false);
@@ -431,9 +438,30 @@ public class Login extends javax.swing.JFrame {
                 
             }
         } catch (HeadlessException | SQLException e){
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnloginKeyPressed
 
+    public void mhslogin(ResultSet set) throws IOException, SQLException{
+        String nama = set.getString("nama");
+        String nim = set.getString("nim");
+        String email = set.getString("email");
+        String mhs = String.format("%s,%s,%s",nama, nim, email);
+        File hmm = new File("mhs.txt");
+        FileWriter file = new FileWriter(hmm);
+        file.write(mhs);file.close();
+    }
+    
+    public void dsnlogin(ResultSet set) throws IOException, SQLException{
+        String nama = set.getString("nama_dsn");
+        String email = set.getString("email");
+        String dsn = String.format("%s,%s",nama, email);
+        File hmm = new File("dsn.txt");
+        FileWriter hai = new FileWriter(hmm);
+        hai.write(dsn); hai.close();
+    }
+    
     /**
      * @param args the command line arguments
      */

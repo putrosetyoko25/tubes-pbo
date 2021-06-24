@@ -9,19 +9,30 @@ import Login.Login;
 import Mahasiswa.DaftarUjian;
 import Mahasiswa.Proposal;
 import config.connectdb;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author ASUS
  */
 public class MenuMahasiswa extends javax.swing.JFrame {
+    
+    String nama_mhs,nim_mhs,email_mhs;
 
     /**
      * Creates new form MenuUtama
      */
     public MenuMahasiswa() {
         setResizable(false);
+        mhslogin();
         initComponents();
+        lblnamamhs.setText(nama_mhs);
     }
 
     /**
@@ -34,7 +45,7 @@ public class MenuMahasiswa extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblnamamhs = new javax.swing.JLabel();
         btnlogout = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -46,9 +57,9 @@ public class MenuMahasiswa extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Putro Setyoko");
+        lblnamamhs.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        lblnamamhs.setForeground(new java.awt.Color(255, 255, 255));
+        lblnamamhs.setText("Putro Setyoko");
 
         btnlogout.setText("Log Out");
         btnlogout.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +74,7 @@ public class MenuMahasiswa extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblnamamhs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnlogout)
                 .addContainerGap())
@@ -73,7 +84,7 @@ public class MenuMahasiswa extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblnamamhs)
                     .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -179,6 +190,26 @@ public class MenuMahasiswa extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnlogoutActionPerformed
 
+    public void mhslogin(){
+        FileReader file;
+        BufferedReader buff;
+        try {
+            file = new FileReader("mhs.txt");
+            buff = new BufferedReader(file);
+        
+            String data = buff.readLine();
+            StringTokenizer token = new StringTokenizer(data, ",");
+            nama_mhs = token.nextToken();
+            nim_mhs = token.nextToken();
+            email_mhs = token.nextToken();
+           
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MenuDosen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MenuDosen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -219,10 +250,10 @@ public class MenuMahasiswa extends javax.swing.JFrame {
     private javax.swing.JButton btnlogout;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblnamamhs;
     // End of variables declaration//GEN-END:variables
 }

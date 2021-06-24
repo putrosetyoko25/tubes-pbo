@@ -9,19 +9,30 @@ import Dosen.JadwalUjian;
 import Dosen.PenilaianPKN;
 import Login.Login;
 import config.connectdb;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author H P
  */
 public class MenuDosen extends javax.swing.JFrame {
+    
+    String nama_dsn, email_dsn;
 
     /**
      * Creates new form MenuDosen
      */
     public MenuDosen() {
         setResizable(false);
+        dsnlogin();
         initComponents();
+        lblnamadosen.setText(nama_dsn);
     }
 
     /**
@@ -34,7 +45,7 @@ public class MenuDosen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblNamaDosen = new javax.swing.JLabel();
+        lblnamadosen = new javax.swing.JLabel();
         btnlogout = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnjadwalujian = new javax.swing.JButton();
@@ -46,9 +57,9 @@ public class MenuDosen extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
-        lblNamaDosen.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
-        lblNamaDosen.setForeground(new java.awt.Color(255, 255, 255));
-        lblNamaDosen.setText("Nama Dosen");
+        lblnamadosen.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        lblnamadosen.setForeground(new java.awt.Color(255, 255, 255));
+        lblnamadosen.setText("Nama Dosen");
 
         btnlogout.setText("Log Out");
         btnlogout.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +74,7 @@ public class MenuDosen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblNamaDosen)
+                .addComponent(lblnamadosen)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnlogout)
                 .addContainerGap())
@@ -73,7 +84,7 @@ public class MenuDosen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNamaDosen)
+                    .addComponent(lblnamadosen)
                     .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -179,6 +190,25 @@ public class MenuDosen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnlogoutActionPerformed
 
+    public void dsnlogin(){
+        FileReader file;
+        BufferedReader buff;
+        try {
+            file = new FileReader("dsn.txt");
+            buff = new BufferedReader(file);
+        
+            String data = buff.readLine();
+            StringTokenizer token = new StringTokenizer(data, ",");
+            nama_dsn = token.nextToken();
+            email_dsn = token.nextToken();
+           
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MenuDosen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MenuDosen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -222,6 +252,6 @@ public class MenuDosen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblNamaDosen;
+    private javax.swing.JLabel lblnamadosen;
     // End of variables declaration//GEN-END:variables
 }
