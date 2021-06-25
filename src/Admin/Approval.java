@@ -145,6 +145,17 @@ public class Approval extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
+        cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariActionPerformed(evt);
+            }
+        });
+        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cariKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("Cari Mahasiswa");
 
         btndecline.setText("Decline");
@@ -291,6 +302,46 @@ public class Approval extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tableMouseClicked
 
+    private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cariActionPerformed
+
+    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+        String key = cari.getText();
+        System.out.println(key);  
+        
+        if(key!=""){
+            cariData(key);
+        }else{
+            TampilData();
+        }
+    }//GEN-LAST:event_cariKeyReleased
+
+    public void cariData(String key){
+        tableapproval = new DefaultTableModel();
+        tableapproval.addColumn("NIM");
+        tableapproval.addColumn("NAMA MAHASISWA");
+        tableapproval.addColumn("EMAIL");
+        tableapproval.addColumn("STATUS");
+        
+        table.setModel(tableapproval);
+        Connection conn = connectdb.tryConnect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("SELECT * from proposal WHERE nim LIKE '%"+key+"%' OR nama LIKE '%"+key+"%' OR emailMHS LIKE '%"+key+"%' OR status LIKE '%"+key+"%'");  
+            while (res.next()) {
+                tableapproval.addRow(new Object[]{
+                    res.getString("nim"),
+                    res.getString("nama"),
+                    res.getString("emailMHS"),
+                    res.getString("status")
+                });
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
