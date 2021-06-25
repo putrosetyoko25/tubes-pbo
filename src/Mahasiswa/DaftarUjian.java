@@ -314,7 +314,7 @@ public class DaftarUjian extends javax.swing.JFrame {
         Connection con = connectdb.tryConnect();
         PreparedStatement ps;
         try{
-               String sql = ("insert into ujian values(?,?,?,?,?,?,?,?,?)");
+               String sql = ("insert into ujian values(?,?,?,?,?,?,?,?,?,?)");
                ps  = con.prepareStatement(sql);
                InputStream is1 = new FileInputStream(new File(uploadNilai));
                InputStream is2 = new FileInputStream(new File(uploadLaporan));
@@ -326,7 +326,8 @@ public class DaftarUjian extends javax.swing.JFrame {
                ps.setDouble(6, Double.parseDouble(txtnilai.getText()));
                ps.setBlob(7,is2);
                ps.setString(8, "-");
-               ps.setDouble(9, 0);
+               ps.setString(9, "-");
+               ps.setDouble(10, 0);
                
                
                

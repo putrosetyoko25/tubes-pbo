@@ -360,10 +360,8 @@ public class Proposal extends javax.swing.JFrame {
                ps.setBlob(6,is2);
                ps.setString(7, txtemail.getText());
                ps.setString(8, txttempatpkn.getText());
-               String tampilan = "MM-dd-yyyy";
-               SimpleDateFormat format = new SimpleDateFormat(tampilan);
+               SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
                String tanggal = String.valueOf(format.format(jwaktupkn.getDate()));
-               System.out.println(tanggal);
                ps.setString(9, tanggal);
                ps.setString(10, "-");
                

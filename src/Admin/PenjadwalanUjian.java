@@ -12,10 +12,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.ComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,6 +37,25 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         setResizable(false);
         initComponents();
         TampilData();
+        ComboDosen();
+    }
+    
+    public void ComboDosen(){
+        
+        Connection conn = connectdb.tryConnect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select * from dosen");
+            while (res.next()) {
+                String nama = res.getString("nama_dsn");
+                System.out.println(nama);
+                cmbdsn.addItem(nama);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
     }
     
     public void TampilData() {
@@ -41,9 +63,9 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         tableujian.addColumn("NIM");
         tableujian.addColumn("NAMA MAHASISWA");
         tableujian.addColumn("EMAIL");
-        tableujian.addColumn("FILE NILAI");
-        tableujian.addColumn("LAPORAN");
         tableujian.addColumn("NILAI PERUSAHAAN");
+        tableujian.addColumn("DATE");
+        tableujian.addColumn("DOSEN PENGUJI");
         
         
         table.setModel(tableujian);
@@ -57,9 +79,9 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
                     res.getString("nim"),
                     res.getString("nama"),
                     res.getString("email"),
-                    res.getString("uploadnilai"),
-                    res.getString("uploadlaporan"),
-                    res.getString("nilai")
+                    res.getString("nilai"),
+                    res.getString("nilai"),
+                    res.getString("dsn_penguji")
                 });
             }
             
@@ -83,6 +105,11 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         btnunduh = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jwaktuujian = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        btnupdate = new javax.swing.JButton();
+        cmbdsn = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +125,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(305, Short.MAX_VALUE)
+                .addContainerGap(307, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(302, 302, 302))
         );
@@ -107,7 +134,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         btnkembali.setText("Kembali");
@@ -142,20 +169,46 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Waktu Ujian");
+        jLabel2.setPreferredSize(new java.awt.Dimension(58, 25));
+
+        jLabel3.setText("Dosen Penguji");
+
+        btnupdate.setText("Update");
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateActionPerformed(evt);
+            }
+        });
+
+        cmbdsn.setMaximumRowCount(7);
+        cmbdsn.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnkembali)
-                        .addGap(154, 154, 154)
+                        .addGap(233, 233, 233)
                         .addComponent(btnunduh)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnupdate)
+                        .addGap(61, 61, 61))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jwaktuujian, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(cmbdsn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -163,11 +216,22 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jwaktuujian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnunduh))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbdsn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnupdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnunduh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -191,6 +255,21 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         int baris = table.getSelectedRow(); 
         nim = tableujian.getValueAt(baris, 0).toString();
     }//GEN-LAST:event_tableMouseClicked
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+        String tanggal = String.valueOf(format.format(jwaktuujian.getDate()));
+        
+        try {
+            Connection conn = connectdb.tryConnect();
+            PreparedStatement stmt = conn.prepareStatement("update ujian set date='"+tanggal+"', dsn_penguji='"+ cmbdsn.getSelectedItem().toString() + "' where nim='"+ nim +"'");
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            TampilData();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnupdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,9 +309,14 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnunduh;
+    private javax.swing.JButton btnupdate;
+    private javax.swing.JComboBox<String> cmbdsn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jwaktuujian;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
