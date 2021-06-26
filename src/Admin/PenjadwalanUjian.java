@@ -48,7 +48,6 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
             java.sql.ResultSet res = stmt.executeQuery("select * from dosen");
             while (res.next()) {
                 String nama = res.getString("nama_dsn");
-                System.out.println(nama);
                 cmbdsn.addItem(nama);
             }
             

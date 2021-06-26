@@ -64,7 +64,6 @@ public class Proposal extends javax.swing.JFrame {
     public Proposal() {
         setResizable(false);
         mhslogin();
-        autonumber();
         initComponents();
     }
     
@@ -91,7 +90,6 @@ public class Proposal extends javax.swing.JFrame {
         txtemail = new javax.swing.JTextField();
         btnkembali = new javax.swing.JButton();
         btnsubmit = new javax.swing.JButton();
-        txtidproposal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txttempatpkn = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
@@ -99,6 +97,8 @@ public class Proposal extends javax.swing.JFrame {
         jwaktupkn = new com.toedter.calendar.JDateChooser();
         txtcv = new javax.swing.JTextField();
         txtportfolio = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -183,12 +183,6 @@ public class Proposal extends javax.swing.JFrame {
             }
         });
 
-        txtidproposal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtidproposalActionPerformed(evt);
-            }
-        });
-
         txttempatpkn.setColumns(20);
         txttempatpkn.setRows(5);
         jScrollPane1.setViewportView(txttempatpkn);
@@ -205,6 +199,14 @@ public class Proposal extends javax.swing.JFrame {
 
         txtportfolio.setPreferredSize(new java.awt.Dimension(6, 25));
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel10.setText("*format file : pdf");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel11.setText("*format file : pdf");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -214,36 +216,44 @@ public class Proposal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtidproposal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtcv, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnfilecv, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                .addGap(35, 35, 35))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(txtcv, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnfilecv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel7))
-                                        .addGap(32, 32, 32)
+                                        .addGap(46, 46, 46)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jwaktupkn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtemail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(64, 64, 64)
-                                        .addComponent(txtportfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnfileportfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(txtportfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnfileportfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 31, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -260,23 +270,22 @@ public class Proposal extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtidproposal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtcv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtcv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnfilecv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(btnfileportfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtportfolio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -288,7 +297,7 @@ public class Proposal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jwaktupkn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsubmit)
                     .addComponent(btnkembali)))
@@ -354,22 +363,22 @@ public class Proposal extends javax.swing.JFrame {
         Connection con = connectdb.tryConnect();
         PreparedStatement ps;
         try{
-               String sql = ("insert into proposal values(?,?,?,?,?,?,?,?,?,?)");
+               String sql = ("insert into proposal values(?,?,?,?,?,?,?,?,?)");
                ps  = con.prepareStatement(sql);
                InputStream is1 = new FileInputStream(new File(cv));
                InputStream is2 = new FileInputStream(new File(portfolio));
-               ps.setString(1, txtidproposal.getText());
-               ps.setString(2, nim_mhs);
-               ps.setString(3, nama_mhs);
-               ps.setString(4, email_mhs);
-               ps.setBlob(5,is1);
-               ps.setBlob(6,is2);
-               ps.setString(7, txtemail.getText());
-               ps.setString(8, txttempatpkn.getText());
+               //ps.setString(1, txtidproposal.getText());
+               ps.setString(1, nim_mhs);
+               ps.setString(2, nama_mhs);
+               ps.setString(3, email_mhs);
+               ps.setBlob(4,is1);
+               ps.setBlob(5,is2);
+               ps.setString(6, txtemail.getText());
+               ps.setString(7, txttempatpkn.getText());
                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
                String tanggal = String.valueOf(format.format(jwaktupkn.getDate()));
-               ps.setString(9, tanggal);
-               ps.setString(10, "-");
+               ps.setString(8, tanggal);
+               ps.setString(9, "-");
                
                ps.executeUpdate();
                JOptionPane.showMessageDialog(null, "Data Inserted");
@@ -414,10 +423,6 @@ public class Proposal extends javax.swing.JFrame {
              System.out.println("Tidak ada yang di pilih.");
          }
     }//GEN-LAST:event_btnfileportfolioActionPerformed
-
-    private void txtidproposalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidproposalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtidproposalActionPerformed
 
    public void mhslogin(){
         FileReader file;
@@ -475,35 +480,14 @@ public class Proposal extends javax.swing.JFrame {
         });
     }
 
-    public void autonumber()
-  {
-    try
-    {
-      Connection conn = connectdb.tryConnect();
-      Statement state = conn.createStatement();
-      String query = "SELECT MAX(id_proposal) FROM proposal"; 
-      
-      ResultSet rs = state.executeQuery(query);
-      if(rs.next())
-      {
-        int a = rs.getInt(1);
-        txtidproposal.setText(Integer.toString(a+1)); 
-      }
-      rs.close();
-      state.close();
-    }
-    catch(Exception ex)
-    {
-      System.out.println(ex);
-    }
-    
-  }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnfilecv;
     private javax.swing.JButton btnfileportfolio;
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnsubmit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -519,7 +503,6 @@ public class Proposal extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jwaktupkn;
     private javax.swing.JTextField txtcv;
     private javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtidproposal;
     private javax.swing.JTextField txtportfolio;
     private javax.swing.JTextArea txttempatpkn;
     // End of variables declaration//GEN-END:variables

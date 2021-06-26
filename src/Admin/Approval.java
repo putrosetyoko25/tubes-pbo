@@ -31,7 +31,9 @@ public class Approval extends javax.swing.JFrame {
     public Approval() {
         setResizable(false);
         initComponents();
+        txtnim.setVisible(false);
         this.TampilData();
+        
         //txtidproposal.setVisible(false);
     }
     // 0 1 2 3 4 
@@ -83,7 +85,7 @@ public class Approval extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btndecline = new javax.swing.JButton();
         btnapprove = new javax.swing.JButton();
-        txtidproposal = new javax.swing.JTextField();
+        txtnim = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,7 +205,7 @@ public class Approval extends javax.swing.JFrame {
                                 .addComponent(btnreceive, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(txtidproposal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -212,7 +214,7 @@ public class Approval extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtidproposal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnreceive, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,7 +253,7 @@ public class Approval extends javax.swing.JFrame {
     private void btndeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeclineActionPerformed
         try {
             Connection conn = connectdb.tryConnect();
-            PreparedStatement stmt = conn.prepareStatement("update proposal set status='Decline' where nim='"+txtidproposal.getText()+"'");
+            PreparedStatement stmt = conn.prepareStatement("update proposal set status='Decline' where nim='"+txtnim.getText()+"'");
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             TampilData();
@@ -263,7 +265,7 @@ public class Approval extends javax.swing.JFrame {
     private void btnapproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnapproveActionPerformed
         try {
             Connection conn = connectdb.tryConnect();
-            PreparedStatement stmt = conn.prepareStatement("update proposal set status='Approve' where nim='"+txtidproposal.getText()+"'");
+            PreparedStatement stmt = conn.prepareStatement("update proposal set status='Approve' where nim='"+txtnim.getText()+"'");
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             TampilData();
@@ -276,7 +278,7 @@ public class Approval extends javax.swing.JFrame {
         
         int baris = table.getSelectedRow(); 
         id_proposal = tableapproval.getValueAt(baris, 0).toString();
-        txtidproposal.setText(tableapproval.getValueAt(baris, 0).toString());
+        txtnim.setText(tableapproval.getValueAt(baris, 0).toString());
         
         /*Connection conn = connectdb.tryConnect();
        
@@ -389,6 +391,6 @@ public class Approval extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
-    private javax.swing.JTextField txtidproposal;
+    private javax.swing.JTextField txtnim;
     // End of variables declaration//GEN-END:variables
 }
