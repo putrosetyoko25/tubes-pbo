@@ -8,17 +8,23 @@ import Main.MenuDosen;
 import Main.MenuMahasiswa;
 import config.connectdb;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -27,6 +33,7 @@ import javax.swing.table.DefaultTableModel;
 public class JadwalUjian extends javax.swing.JFrame {
 
     String nama_dsn, email_dsn;
+    String nim_mhs, nama_mhs, email_mhs, nilai_perusahaan;
     private DefaultTableModel tableujian;
     
     public JadwalUjian() {
@@ -52,9 +59,11 @@ public class JadwalUjian extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         caridata = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablejadwal = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        btnpresent = new javax.swing.JButton();
+        btnabsent = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablejadwal = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 400));
@@ -71,7 +80,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(344, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(343, 343, 343))
         );
@@ -119,6 +128,27 @@ public class JadwalUjian extends javax.swing.JFrame {
 
         jLabel3.setText("Search");
 
+        jButton1.setText("Kembali");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnpresent.setText("Present");
+        btnpresent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpresentActionPerformed(evt);
+            }
+        });
+
+        btnabsent.setText("Absent");
+        btnabsent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnabsentActionPerformed(evt);
+            }
+        });
+
         tablejadwal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -127,17 +157,15 @@ public class JadwalUjian extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "NIM", "NAMA", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tablejadwal);
-
-        jButton1.setText("Kembali");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        tablejadwal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablejadwalMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(tablejadwal);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,28 +174,35 @@ public class JadwalUjian extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(caridata, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnabsent)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnpresent)
+                        .addGap(43, 43, 43)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(caridata, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnpresent)
+                    .addComponent(btnabsent))
                 .addContainerGap())
         );
 
@@ -176,7 +211,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -196,18 +231,18 @@ public class JadwalUjian extends javax.swing.JFrame {
     public void TampilData(){
         
         Connection con = connectdb.tryConnect();
-        try {
-            java.sql.Statement stat = con.createStatement();
-            ResultSet res=stat.executeQuery ("select * from ujian where "
-                    + "dsn_penguji='" +nama_dsn+"'");
-            
+        
             tableujian = new DefaultTableModel();
             tableujian.addColumn("DATE");
             tableujian.addColumn("NIM");
             tableujian.addColumn("NAMA MAHASISWA");
             tablejadwal.setModel(tableujian);
+        
+        try {
+            java.sql.Statement stat = con.createStatement();
+            ResultSet res=stat.executeQuery ("select * from ujian where dsn_penguji='" +nama_dsn+"'");
             
-            if (res.next()) {
+            while(res.next()) {
                 tableujian.addRow(new Object[]{
                     res.getString("date"),
                     res.getString("nim"),
@@ -234,8 +269,7 @@ public class JadwalUjian extends javax.swing.JFrame {
 
     private void caridataKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_caridataKeyReleased
        String key = caridata.getText();
-        System.out.println(key);  
-        
+       
         if(key!=""){
             cari(key);
         }else{
@@ -243,23 +277,46 @@ public class JadwalUjian extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_caridataKeyReleased
 
+    private void btnabsentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabsentActionPerformed
+        Object[] options = {"Iya","Batal"};
+        int n = JOptionPane.showOptionDialog(null,nama_mhs + " tidak hadir?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
+        if(n == JOptionPane.YES_OPTION){
+            deleteData("Absent");
+            TampilData();
+        }
+    }//GEN-LAST:event_btnabsentActionPerformed
+
+    private void tablejadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablejadwalMouseClicked
+        int baris = tablejadwal.getSelectedRow(); 
+        
+         nim_mhs=(String) tablejadwal.getValueAt(baris,1);
+        nama_mhs=(String) tablejadwal.getValueAt(baris,2);
+        
+    }//GEN-LAST:event_tablejadwalMouseClicked
+
+    private void btnpresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpresentActionPerformed
+        ambilData();
+        insertData();
+        deleteData("Present");
+        TampilData();
+    }//GEN-LAST:event_btnpresentActionPerformed
+
     void cari(String key){
         Connection con = connectdb.tryConnect();
+        
+            tableujian = new DefaultTableModel();
+            tableujian.addColumn("DATE");
+            tableujian.addColumn("NIM");
+            tableujian.addColumn("NAMA MAHASISWA");
+        
+            tablejadwal.setModel(tableujian);
+        
         try {
             java.sql.Statement stat = con.createStatement();
-            ResultSet res=stat.executeQuery ("select * from ujian where "
-                    + "dsn_penguji='" +nama_dsn+"'");
-            res = stat.executeQuery("SELECT * from ujian WHERE dsn_penguji='" +nama_dsn+"', date LIKE '%"+key+"%' OR nim LIKE '%"+key+"%' OR nama LIKE '%"+key+"%'");  
+            ResultSet res = stat.executeQuery("SELECT * from ujian WHERE date LIKE '%"+key+"%' OR nim LIKE '%"+key+"%' OR nama LIKE '%"+key+"%'");  
 
-            if (res.next()) {
-                
-                tableujian = new DefaultTableModel();
-                tableujian.addColumn("DATE");
-                tableujian.addColumn("NIM");
-                tableujian.addColumn("NAMA MAHASISWA");
-        
-                tablejadwal.setModel(tableujian);
-       
+            while (res.next() && res.getString("dsn_penguji").equals(nama_dsn)) {
+               
                 tableujian.addRow(new Object[]{
                     res.getString("date"),
                     res.getString("nim"),
@@ -270,7 +327,69 @@ public class JadwalUjian extends javax.swing.JFrame {
             Logger.getLogger(JadwalUjian.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void insertData(){
+        Connection con = connectdb.tryConnect();
+        PreparedStatement ps;
+        try{
+               String sql = ("insert into nilai values(?,?,?,?,?,?,?)");
+               ps  = con.prepareStatement(sql);
+               
+               ps.setString(1, nim_mhs); // nim nama email dsn nilai_perusahaan niilai_dsn nilai_total
+               ps.setString(2, nama_mhs);
+               ps.setString(3, email_mhs);
+               ps.setString(4, nama_dsn); Double asd = Double.parseDouble(nilai_perusahaan);
+               ps.setDouble(5, asd);
+               ps.setDouble(6, 0);
+               DecimalFormat formatData = new DecimalFormat("#.##");
+               double total  = Double.valueOf(formatData.format(0.6 * asd));
+               ps.setDouble(7, total);
+               ps.executeUpdate();
+               JOptionPane.showMessageDialog(null, "Data Inserted");
+              
+           }catch(Exception ex){
+               JOptionPane.showMessageDialog(null, "Data not Inserted");
+           }
+    }
+    
+    public void deleteData(String status){
+        Connection con = connectdb.tryConnect();
+        try
+         {
+            String sql="delete from ujian where nim='"+nim_mhs+"'";
+            PreparedStatement st=con.prepareStatement(sql);
+            st.executeUpdate();
             
+            PreparedStatement ps = con.prepareStatement("insert info arsip_attendance");
+               ps.setString(1, nim_mhs); // nim nama email dsn nilai_perusahaan niilai_dsn nilai_total
+               ps.setString(2, nama_mhs);
+               ps.setString(3, email_mhs);
+               ps.setString(4, status);
+         }
+        catch (Exception e)
+        {
+            System.out.println("Gagal");
+        }
+    }
+        
+    public void ambilData(){
+        
+        Connection con = connectdb.tryConnect();
+        try{
+        java.sql.Statement stat = con.createStatement();
+            ResultSet res=stat.executeQuery ("select * from ujian where nim='" +nim_mhs+"'");
+            
+            while(res.next()) {
+                email_mhs=(String)res.getString("email");
+                nilai_perusahaan = (String)res.getString("nilai");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JadwalUjian.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    
     public void dsnlogin(){
         FileReader file;
         BufferedReader buff;
@@ -326,6 +445,8 @@ public class JadwalUjian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnabsent;
+    private javax.swing.JButton btnpresent;
     private javax.swing.JTextField caridata;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -334,7 +455,7 @@ public class JadwalUjian extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablejadwal;
     // End of variables declaration//GEN-END:variables
 }

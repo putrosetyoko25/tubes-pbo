@@ -80,7 +80,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
                     res.getString("nama"),
                     res.getString("email"),
                     res.getString("nilai"),
-                    res.getString("nilai"),
+                    res.getString("date"),
                     res.getString("dsn_penguji")
                 });
             }

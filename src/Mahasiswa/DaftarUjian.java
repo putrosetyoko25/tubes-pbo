@@ -191,7 +191,7 @@ public class DaftarUjian extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -247,7 +247,7 @@ public class DaftarUjian extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(txtfilelaporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnfilenilai1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsubmit1)
                     .addComponent(btnsubmit))
@@ -289,7 +289,7 @@ public class DaftarUjian extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(674, 398));
@@ -309,7 +309,7 @@ public class DaftarUjian extends javax.swing.JFrame {
         Connection con = connectdb.tryConnect();
         PreparedStatement ps;
         try{
-               String sql = ("insert into ujian values(?,?,?,?,?,?,?,?,?,?)");
+               String sql = ("insert into ujian values(?,?,?,?,?,?,?,?,?)");
                ps  = con.prepareStatement(sql);
                InputStream is1 = new FileInputStream(new File(uploadNilai));
                InputStream is2 = new FileInputStream(new File(uploadLaporan));
@@ -318,11 +318,10 @@ public class DaftarUjian extends javax.swing.JFrame {
                ps.setString(3, nama_mhs);
                ps.setString(4, email_mhs);
                ps.setBlob(5,is1); 
-               ps.setDouble(6, Double.parseDouble(txtnilai.getText()));
+               ps.setString(6, txtnilai.getText());
                ps.setBlob(7,is2);
                ps.setString(8, "-");
                ps.setString(9, "-");
-               ps.setDouble(10, 0);
                
                
                
