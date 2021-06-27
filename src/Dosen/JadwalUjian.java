@@ -300,7 +300,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         TampilData();
     }//GEN-LAST:event_btnpresentActionPerformed
 
-    void cari(String key){
+    public void cari(String key){
         Connection con = connectdb.tryConnect();
         
             tableujian = new DefaultTableModel();
