@@ -20,7 +20,8 @@ import javax.swing.JOptionPane;
  */
 public class AddAdmin extends javax.swing.JFrame {
 
-    /** Creates new form AddAdmin */
+    boolean cekusername, cekpassword,cekfinal;
+    
     public AddAdmin() {
         setResizable(false);
         initComponents();
@@ -242,34 +243,50 @@ public class AddAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnkembaliActionPerformed
 
     private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
-
-        Connection con = connectdb.tryConnect();
-        PreparedStatement ps;
-        try{
-            String sql = ("insert into admin values(?,?,?)");
-            ps  = con.prepareStatement(sql);
-            ps.setString(1, txtnamaadmin.getText());
-            ps.setString(2, txtusername.getText());
-            ps.setString(3, txtpassword.getText());
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data Inserted");
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Data not Inserted");
+        cekcek();
+        if(cekfinal){
+            Connection con = connectdb.tryConnect();
+            PreparedStatement ps;
+            try{
+                String sql = ("insert into admin values(?,?,?)");
+                ps  = con.prepareStatement(sql);
+                ps.setString(1, txtnamaadmin.getText());
+                ps.setString(2, txtusername.getText());
+                ps.setString(3, txtpassword.getText());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data Inserted");
+            }catch(HeadlessException | SQLException ex){
+                JOptionPane.showMessageDialog(null, "Data not Inserted");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Terdapat Inputan yang Masih Error");
         }
     }//GEN-LAST:event_btnsubmitActionPerformed
 
     private void txtusernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusernameKeyReleased
         if(txtusername.getText().length() > 10){
             jLabel2.setVisible(true);
+            cekusername = false;
+        } else {
+        jLabel2.setVisible(false);
+            cekusername = true;
         }
     }//GEN-LAST:event_txtusernameKeyReleased
 
     private void txtpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyReleased
         if(txtpassword.getText().length() > 8){
             jLabel3.setVisible(true);
+            cekpassword = false;
+        } else {
+            jLabel3.setVisible(false);
+            cekpassword = true;
         }
     }//GEN-LAST:event_txtpasswordKeyReleased
 
+    
+    public void cekcek(){
+        cekfinal = cekusername && cekpassword;
+    }
     /**
      * @param args the command line arguments
      */

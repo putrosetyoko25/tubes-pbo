@@ -20,14 +20,14 @@ import javax.swing.JOptionPane;
 
 public class AddDosen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddMahasiswa
-     */
+    boolean ceknama,ceknidn,cekkode,cekemail,cekpassword;
+    boolean cekfinal;
     public AddDosen() {
         setResizable(false);
         initComponents();
         jLabel3.setVisible(false);
         jLabel4.setVisible(false);
+        jLabel14.setVisible(false);
         jLabel5.setVisible(false);
         jLabel13.setVisible(false);
     }
@@ -77,6 +77,8 @@ public class AddDosen extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cmbjenkel = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         jnamadosen2.setText("Input Nama Dosen");
         jnamadosen2.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +146,11 @@ public class AddDosen extends javax.swing.JFrame {
         txtnamadosen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnamadosenActionPerformed(evt);
+            }
+        });
+        txtnamadosen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnamadosenKeyReleased(evt);
             }
         });
 
@@ -214,11 +221,11 @@ public class AddDosen extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel3.setText("*username maksimal 10 digit");
+        jLabel3.setText("*NIDN harus 10 digit");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel4.setText("*kode dosen maksimal 7 karakter");
+        jLabel4.setText("*kode dosen 7 karakter, cntoh : DSN0001");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 0, 0));
@@ -230,73 +237,89 @@ public class AddDosen extends javax.swing.JFrame {
 
         cmbjenkel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan", " " }));
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel14.setText("*NIDN harus angka");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel15.setText("*Nama tidak boleh kosong");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnkembali)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnsubmit)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(50, 50, 50))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
-                                .addComponent(jLabel6))
-                            .addGap(83, 83, 83)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtnamadosen)
-                                    .addComponent(txtnidn, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel7))
-                            .addGap(75, 75, 75)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(txtkodedosen, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel13)
-                                .addComponent(cmbjenkel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel10)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(77, 77, 77))
+                                .addGap(134, 134, 134)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtnidn, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel7))
+                                .addGap(75, 75, 75)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtkodedosen, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(cmbjenkel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(83, 83, 83)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(txtnamadosen, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(1, 1, 1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtnamadosen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtnidn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cmbjenkel, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbjenkel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtkodedosen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,7 +337,7 @@ public class AddDosen extends javax.swing.JFrame {
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnkembali)
                     .addComponent(btnsubmit))
@@ -356,48 +379,128 @@ public class AddDosen extends javax.swing.JFrame {
 
     private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
 
-        Connection con = connectdb.tryConnect();
-        PreparedStatement ps;
-        try{
-            String sql = ("insert into dosen values(?,?,?,?,?,?)");
-            ps  = con.prepareStatement(sql);
-            ps.setString(1, txtnidn.getText());
-            ps.setString(2, txtkodedosen.getText());
-            ps.setString(3, txtnamadosen.getText());
-            ps.setString(4, cmbjenkel.getSelectedItem().toString());
-            ps.setString(5, txtemail.getText());
-            ps.setString(6, txtpassword.getText());
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data Inserted");
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Data not Inserted");
+        cekcek();
+        if(cekfinal){
+            Connection con = connectdb.tryConnect();
+            PreparedStatement ps;
+            try{
+                String sql = ("insert into dosen values(?,?,?,?,?,?)");
+                ps  = con.prepareStatement(sql);
+                ps.setString(1, txtnidn.getText());
+                ps.setString(2, txtkodedosen.getText());
+                ps.setString(3, txtnamadosen.getText());
+                ps.setString(4, cmbjenkel.getSelectedItem().toString());
+                ps.setString(5, txtemail.getText());
+                ps.setString(6, txtpassword.getText());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data Inserted");
+            }catch(HeadlessException | SQLException ex){
+                JOptionPane.showMessageDialog(null, "Data not Inserted");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Terdapat Inputan yang Masih Error");
         }
     }//GEN-LAST:event_btnsubmitActionPerformed
 
     private void txtnidnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnidnKeyReleased
-        if(txtnidn.getText().length() > 10){
-            jLabel3.setVisible(true);
+        boolean cekangka, cekpanjang;
+        
+        if(txtnidn.getText().matches("[0-9]+")){
+            jLabel14.setVisible(false);
+            cekangka = true;
+        } else {
+            jLabel14.setVisible(true);
+            cekangka = false;
         }
+        if(txtnidn.getText().length() != 10){
+            jLabel3.setVisible(true);
+            cekpanjang = false;
+        } else {
+            jLabel3.setVisible(false);
+            cekpanjang = true;
+        }
+        
+        if(cekangka && cekpanjang){
+            ceknidn = true;
+        } else {
+            ceknidn = false;
+        }
+        
     }//GEN-LAST:event_txtnidnKeyReleased
 
     private void txtkodedosenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtkodedosenKeyReleased
-        if(txtkodedosen.getText().length() > 7){
+        boolean cek1, cek2;
+        if(txtkodedosen.getText().length() != 7){
             jLabel4.setVisible(true);
+            cekkode = false;
+        } else {
+            String dsn = txtkodedosen.getText().substring(0,3);
+            String kode = txtkodedosen.getText().substring(4,7);
+            
+            if(dsn.equals("DSN")){
+                jLabel4.setVisible(false);
+                cek1 = true;
+            } else {
+                jLabel4.setVisible(true);
+                cek1 = false;
+            }  
+            
+            if(kode.matches("[0-9]+")){
+                jLabel4.setVisible(false);
+                cek2 = true;
+            } else {
+                jLabel4.setVisible(true);
+                cek2 = false;
+            }
+            
+            if(cek1 && cek2){
+                cekkode = true;
+            } else{
+                cekkode = false;
+            }
+            
+            jLabel4.setVisible(false);
         }
     }//GEN-LAST:event_txtkodedosenKeyReleased
 
     private void txtemailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyReleased
-        if(txtemail.getText().matches("(*)@gmail.com")||txtemail.getText().matches("(*)@webmail.umm.ac.id")){
-            jLabel5.setVisible(true);
+        boolean is = txtemail.getText().matches("(.*)@gmail.com");
+        boolean is2 = txtemail.getText().matches("(.*)@umm.ac.id");
+
+        if(is || is2){
+            jLabel13.setVisible(false);
+            cekemail = true;
+        } else if(!is || !is2){
+            jLabel13.setVisible(true);
+            cekemail = false;
         }
+        
     }//GEN-LAST:event_txtemailKeyReleased
 
     private void txtpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyReleased
         if(txtpassword.getText().length() > 10){
-            jLabel13.setVisible(true);
+            jLabel5.setVisible(true);
+            cekpassword = false;
+        } else {
+            jLabel5.setVisible(false);
+            cekpassword = true;
         }
     }//GEN-LAST:event_txtpasswordKeyReleased
 
+    private void txtnamadosenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnamadosenKeyReleased
+        if(txtnamadosen.getText().equals("")){
+            jLabel15.setVisible(true);
+            ceknama = false;
+        } else{
+            jLabel15.setVisible(false);
+            ceknama = true;
+        }
+    }//GEN-LAST:event_txtnamadosenKeyReleased
+
+    
+    public void cekcek(){
+        cekfinal = ceknidn && cekkode && cekemail && cekpassword && ceknama;
+    }
     /**
      * @param args the command line arguments
      */
@@ -457,6 +560,8 @@ public class AddDosen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

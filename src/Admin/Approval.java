@@ -23,7 +23,7 @@ public class Approval extends javax.swing.JFrame {
     
     private DefaultTableModel tableapproval;
     private String SQL; 
-    private String id_proposal, nama, nim, email;
+    private String id_nim;
 
     /**
      * Creates new form Approval
@@ -36,7 +36,7 @@ public class Approval extends javax.swing.JFrame {
         
         //txtidproposal.setVisible(false);
     }
-    // 0 1 2 3 4 
+    
     public void TampilData() {
         tableapproval = new DefaultTableModel();
         tableapproval.addColumn("NIM");
@@ -158,7 +158,7 @@ public class Approval extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Cari Mahasiswa");
+        jLabel3.setText("Search");
 
         btndecline.setText("Decline");
         btndecline.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +192,7 @@ public class Approval extends javax.swing.JFrame {
                                 .addComponent(btnapprove))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)))
@@ -222,7 +222,7 @@ public class Approval extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
@@ -277,30 +277,8 @@ public class Approval extends javax.swing.JFrame {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         
         int baris = table.getSelectedRow(); 
-        id_proposal = tableapproval.getValueAt(baris, 0).toString();
+        id_nim = tableapproval.getValueAt(baris, 0).toString();
         txtnim.setText(tableapproval.getValueAt(baris, 0).toString());
-        
-        /*Connection conn = connectdb.tryConnect();
-       
-        try {
-            java.sql.Statement stat = conn.createStatement();
-            ResultSet result=stat.executeQuery("select id_proposal from mahasiswa where nim='" + nim +"'");
-            java.sql.ResultSet res = stat.executeQuery(SQL);
-            while (res.next()) {
-                tableapproval.addRow(new Object[]{
-                    res.getString("nim"),
-                });
-
-               
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }*/
-        
-        
-        //nama = tableapproval.getValueAt(baris, 1).toString();
-        //email = tableapproval.getValueAt(baris, 2).toString();
-        
         
     }//GEN-LAST:event_tableMouseClicked
 
@@ -309,8 +287,7 @@ public class Approval extends javax.swing.JFrame {
     }//GEN-LAST:event_cariActionPerformed
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
-        String key = cari.getText();
-        System.out.println(key);  
+        String key = cari.getText(); 
         
         if(key!=""){
             cariData(key);

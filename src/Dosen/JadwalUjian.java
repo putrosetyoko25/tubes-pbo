@@ -331,7 +331,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         Connection con = connectdb.tryConnect();
         PreparedStatement ps;
         try{
-               String sql = ("insert into nilai values(?,?,?,?,?,?,?)");
+               String sql = ("insert into nilai values(?,?,?,?,?,?,?,?)");
                ps  = con.prepareStatement(sql);
                
                ps.setString(1, nim_mhs); // nim nama email dsn nilai_perusahaan niilai_dsn nilai_total
@@ -343,6 +343,7 @@ public class JadwalUjian extends javax.swing.JFrame {
                DecimalFormat formatData = new DecimalFormat("#.##");
                double total  = Double.valueOf(formatData.format(0.6 * asd));
                ps.setDouble(7, total);
+               ps.setString(8,"-");
                ps.executeUpdate();
                JOptionPane.showMessageDialog(null, "Data Inserted");
               

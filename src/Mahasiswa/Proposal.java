@@ -401,7 +401,14 @@ public class Proposal extends javax.swing.JFrame {
              cv = selectedFile.getAbsolutePath();
              txtcv.setText(cv);
              txtcv.setEditable(false);
-              }
+             int panjang = txtcv.getText().length();
+             System.out.println(txtcv.getText().substring(panjang-4,panjang));
+             if(txtcv.getText().substring(panjang-4,panjang).equals(".pdf")){
+                 System.out.println("Hai");
+             } else {
+                 JOptionPane.showMessageDialog(null, "Hanya menerima .pdf");
+             }
+             }
          else if(result == JFileChooser.CANCEL_OPTION){
              System.out.println("Tidak ada yang di pilih.");
          }

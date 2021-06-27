@@ -6,6 +6,11 @@
 package Admin;
 import Main.MenuAdmin;
 import config.connectdb;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,14 +18,53 @@ import config.connectdb;
  */
 public class NilaiPKN extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NilaiPKN
-     */
+    DefaultTableModel tableadmin;
+    String id_nim,id_nama,id_email,id_nilaiP,id_nilaiD,id_nilaifix;
+    
     public NilaiPKN() {
         setResizable(false);
         initComponents();
+        txtnim.setVisible(false);
+        TampilData();
     }
 
+    
+    public void TampilData() {
+        tableadmin = new DefaultTableModel();
+        tableadmin.addColumn("NIM");
+        tableadmin.addColumn("NAMA MAHASISWA");
+        tableadmin.addColumn("EMAIL");
+        tableadmin.addColumn("NILAI PERUSAHAAN");
+        tableadmin.addColumn("NILAI DOSEN");
+        tableadmin.addColumn("NILAI TOTAL");
+        tableadmin.addColumn("STATUS");
+        
+        tablenilai.setModel(tableadmin);
+        Connection conn = connectdb.tryConnect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            String sql = "select * from nilai";
+            java.sql.ResultSet res = stmt.executeQuery(sql);
+            while (res.next()) {
+                tableadmin.addRow(new Object[]{
+                    res.getString("nim"),
+                    res.getString("nama"),
+                    res.getString("emailMHS"),
+                    res.getString("nilai_perusahaan"),
+                    res.getString("nilai_dsn"),
+                    res.getString("nilai_total"),
+                    res.getString("status")
+                });
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,8 +77,12 @@ public class NilaiPKN extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablenilai = new javax.swing.JTable();
         btnkembali = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cari = new javax.swing.JTextField();
+        txtnim = new javax.swing.JTextField();
+        btnsendmail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,7 +110,7 @@ public class NilaiPKN extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablenilai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -73,12 +121,37 @@ public class NilaiPKN extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tablenilai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablenilaiMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablenilai);
 
         btnkembali.setText("Kembali");
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnkembaliActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Search");
+
+        cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariActionPerformed(evt);
+            }
+        });
+        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cariKeyReleased(evt);
+            }
+        });
+
+        btnsendmail.setText("Send Mail");
+        btnsendmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsendmailActionPerformed(evt);
             }
         });
 
@@ -92,18 +165,32 @@ public class NilaiPKN extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnkembali)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnsendmail, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnim))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnkembali, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(btnsendmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -119,6 +206,77 @@ public class NilaiPKN extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
 
+    private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cariActionPerformed
+
+    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+        String key = cari.getText();
+
+        if(key!=""){
+            cariData(key);
+        }else{
+            TampilData();
+        }
+    }//GEN-LAST:event_cariKeyReleased
+
+    private void tablenilaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablenilaiMouseClicked
+        int baris = tablenilai.getSelectedRow(); 
+        id_nim = tableadmin.getValueAt(baris, 0).toString();
+        id_nama = tableadmin.getValueAt(baris, 1).toString();
+        id_email = tableadmin.getValueAt(baris, 2).toString();
+        id_nilaiP = tableadmin.getValueAt(baris, 3).toString();
+        id_nilaiD = tableadmin.getValueAt(baris, 4).toString();
+        id_nilaifix = tableadmin.getValueAt(baris, 5).toString();
+        
+        System.out.println(id_nim + id_nama+id_email+id_nilaiP+id_nilaiD+ id_nilaifix);
+        txtnim.setText(tableadmin.getValueAt(baris, 0).toString());
+    }//GEN-LAST:event_tablenilaiMouseClicked
+
+    private void btnsendmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsendmailActionPerformed
+        try {
+            Connection conn = connectdb.tryConnect();
+            PreparedStatement stmt = conn.prepareStatement("update nilai set status='Sended' where nim='"+id_nim+"'");
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Email Sended", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            TampilData();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnsendmailActionPerformed
+
+    public void cariData(String key){
+        tableadmin = new DefaultTableModel();
+        tableadmin.addColumn("NIM");
+        tableadmin.addColumn("NAMA MAHASISWA");
+        tableadmin.addColumn("EMAIL");
+        tableadmin.addColumn("NILAI PERUSAHAAN");
+        tableadmin.addColumn("NILAI DOSEN");
+        tableadmin.addColumn("NILAI TOTAL");
+        tableadmin.addColumn("STATUS");
+        
+        tablenilai.setModel(tableadmin);
+        Connection conn = connectdb.tryConnect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("SELECT * from nilai WHERE nim LIKE '%"+key+"%' OR nama LIKE '%"+key+"%' OR emailMHS LIKE '%"+key+"%' OR nilai_perusahaan LIKE '%"+key+"%' OR nilai_dsn LIKE '%"+key+"%' OR nilai_total LIKE '%"+key+"%' OR status LIKE '%"+key+"%'");
+            while (res.next()) {
+                tableadmin.addRow(new Object[]{
+                    res.getString("nim"),
+                    res.getString("nama"),
+                    res.getString("emailMHS"),
+                    res.getString("nilai_perusahaan"),
+                    res.getString("nilai_dsn"),
+                    res.getString("nilai_total"),
+                    res.getString("status")
+                });
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -156,9 +314,13 @@ public class NilaiPKN extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnkembali;
+    private javax.swing.JButton btnsendmail;
+    private javax.swing.JTextField cari;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablenilai;
+    private javax.swing.JTextField txtnim;
     // End of variables declaration//GEN-END:variables
 }

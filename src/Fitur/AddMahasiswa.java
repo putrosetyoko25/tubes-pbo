@@ -16,17 +16,21 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class AddMahasiswa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddMahasiswa
-     */
+    boolean ceknama, ceknim, ceknophone, cekemail, cekpassword, cekfinal;
+    static SendMail mail;
+    
     public AddMahasiswa() {
         setResizable(false);
         initComponents();
         jLabel5.setVisible(false);
+        jLabel14.setVisible(false);
+        jLabel15.setVisible(false);
         jLabel16.setVisible(false);
         jLabel17.setVisible(false);
     }
@@ -76,6 +80,7 @@ public class AddMahasiswa extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -123,6 +128,11 @@ public class AddMahasiswa extends javax.swing.JFrame {
         txtnama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnamaActionPerformed(evt);
+            }
+        });
+        txtnama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnamaKeyReleased(evt);
             }
         });
 
@@ -200,7 +210,7 @@ public class AddMahasiswa extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(233, 233, 233)
+                .addGap(252, 252, 252)
                 .addComponent(jLabel13)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -234,6 +244,10 @@ public class AddMahasiswa extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(153, 0, 0));
         jLabel5.setText("*password maksimal 16 karakter");
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel18.setText("*Nama tidak boleh kosong");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -249,50 +263,55 @@ public class AddMahasiswa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(75, 75, 75)
+                        .addComponent(txtnama))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
-                                .addComponent(jLabel6))
-                            .addGap(75, 75, 75)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtnama, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                                    .addComponent(txtnim))
-                                .addComponent(jLabel15)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel12))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtnophone)
-                                    .addComponent(cmbjenkel, 0, 214, Short.MAX_VALUE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel17))))
+                                .addGap(184, 184, 184)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel18)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtnophone)
+                                        .addComponent(cmbjenkel, 0, 214, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel17))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtnama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -325,21 +344,22 @@ public class AddMahasiswa extends javax.swing.JFrame {
                         .addComponent(jLabel12)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsignup)
                     .addComponent(btnkembali))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130))
         );
 
-        setSize(new java.awt.Dimension(588, 668));
+        setSize(new java.awt.Dimension(588, 640));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -368,41 +388,77 @@ public class AddMahasiswa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnkembaliActionPerformed
 
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
-        Connection con = connectdb.tryConnect();
-        PreparedStatement ps;
-        try{
-            String sql = ("insert into mahasiswa values(?,?,?,?,?,?,?)");
-            ps  = con.prepareStatement(sql);
-            ps.setString(1, txtnim.getText());
-            ps.setString(2, txtnama.getText());
-            ps.setString(3, (String) cmbjenkel.getSelectedItem());
-            ps.setString(4, txtalamat.getText());
-            ps.setString(5, txtnophone.getText());
-            ps.setString(6, txtemail.getText());
-            ps.setString(7, txtpassword.getText());
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data Inserted");
-            clear();
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(null, "Data not Inserted");
+        mail = new SendMail();
+        cekcek();
+        if(cekfinal){
+            Connection con = connectdb.tryConnect();
+            PreparedStatement ps;
+            try{
+                String sql = ("insert into mahasiswa values(?,?,?,?,?,?,?)");
+                ps  = con.prepareStatement(sql);
+                ps.setString(1, txtnim.getText());
+                ps.setString(2, txtnama.getText());
+                ps.setString(3, (String) cmbjenkel.getSelectedItem());
+                ps.setString(4, txtalamat.getText());
+                ps.setString(5, txtnophone.getText());
+                ps.setString(6, txtemail.getText());
+                ps.setString(7, txtpassword.getText());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data Inserted");
+                String text = getText(txtnama.getText(), txtnim.getText(),txtnophone.getText(), txtpassword.getText());
+                String email = txtemail.getText();
+                clear();
+                mail.sendEmail(email, text);
+                JOptionPane.showMessageDialog(null, "We Sent a Mail to your account : " + email);
+                Login frm = new Login();
+                frm.setVisible(true);
+                this.setVisible(false);
+                this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                this.dispose();
+            }catch(HeadlessException | SQLException ex){
+                JOptionPane.showMessageDialog(null, "Data not Inserted");
+            } catch (Exception ex) {
+                Logger.getLogger(AddMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Terdapat Inputan yang Masih Error");
         }
     }//GEN-LAST:event_btnsignupActionPerformed
 
     private void txtnimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnimKeyReleased
+        boolean cek1 = false;
+        boolean cek2 = txtnim.getText().matches("[0-9]+");
+        
         if(txtnim.getText().length() != 15){
             jLabel14.setVisible(true);
+            cek1 = false;
         } else if (txtnim.getText().length() == 15){
             jLabel14.setVisible(false);
-        } else if(txtnim.getText().matches("[0-9]")){
+            cek1 = true;
+        }
+        
+        if(cek2) {
             jLabel15.setVisible(false);
-        } else if (!txtnim.getText().matches("[0-9]")){
+        } else {
             jLabel15.setVisible(true);
         }
+        
+        if(cek1 && cek2){
+            ceknim = true;
+        } else {
+            ceknim = false;
+        }
+        
+        
     }//GEN-LAST:event_txtnimKeyReleased
 
     private void txtnophoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnophoneKeyReleased
         if(txtnophone.getText().length() > 13){
             jLabel16.setVisible(true);
+            ceknophone = false;
+        } else {
+            jLabel16.setVisible(false);
+            ceknophone = true;
         }
     }//GEN-LAST:event_txtnophoneKeyReleased
 
@@ -411,19 +467,57 @@ public class AddMahasiswa extends javax.swing.JFrame {
         boolean is2 = txtemail.getText().matches("(.*)@webmail.umm.ac.id");
 
         if(is || is2){
-            jLabel7.setVisible(false);
+            jLabel17.setVisible(false);
+            cekemail = true;
         } else if(!is || !is2){
-            jLabel7.setVisible(true);
+            jLabel17.setVisible(true);
+            cekemail = false;
         }
         
     }//GEN-LAST:event_txtemailKeyReleased
 
     private void txtpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyReleased
         if(txtpassword.getText().length() > 16){
-            jLabel15.setVisible(true);
+            jLabel5.setVisible(true);
+            cekpassword = false;
+        } else {
+            jLabel5.setVisible(false);
+            cekpassword = true;
         }
     }//GEN-LAST:event_txtpasswordKeyReleased
 
+    private void txtnamaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnamaKeyReleased
+        if(txtnama.getText().equals("")){
+            jLabel18.setVisible(true);
+            ceknama = false;
+        } else {
+            jLabel18.setVisible(false);
+            ceknama = true;
+        }
+    }//GEN-LAST:event_txtnamaKeyReleased
+
+    
+    public void cekcek(){
+        if(ceknama && ceknim && ceknophone && cekemail && cekpassword){
+            cekfinal = true;
+        } else {
+            cekfinal = false;
+        }
+    }
+    
+    public String getText(String nama, String nim, String nophone, String password){
+     
+        String kirim = String.format("Selamat! Akun Sistem PKN Anda telah aktif. Berikut informasi akun Anda:\n" +
+    "\n" +
+    "\t\tNama\t\t\t%s\n" +
+    "\t\tNIM\t\t\t%s\n" +
+    "\t\tNo Phone\t\t%s\n" +
+    "\t\tUsername\t\t%s\n" +
+    "\t\tPassword\t\t%s\n" +
+    "Gunakan Username dan Password untuk proses login Aplikasi Sistem PKN.", nama, nim, nophone, nim, password);
+        
+        return kirim;
+    }
     /**
      * @param args the command line arguments
      */
@@ -474,6 +568,7 @@ public class AddMahasiswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
