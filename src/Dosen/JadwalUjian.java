@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -64,6 +66,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         btnabsent = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablejadwal = new javax.swing.JTable();
+        btndownload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 400));
@@ -167,6 +170,13 @@ public class JadwalUjian extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablejadwal);
 
+        btndownload.setText("Download Laporan");
+        btndownload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndownloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -174,14 +184,17 @@ public class JadwalUjian extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(caridata, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btndownload)
+                        .addGap(176, 176, 176)
                         .addComponent(btnabsent)
                         .addGap(18, 18, 18)
                         .addComponent(btnpresent)
@@ -201,7 +214,8 @@ public class JadwalUjian extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btnpresent)
-                    .addComponent(btnabsent))
+                    .addComponent(btnabsent)
+                    .addComponent(btndownload))
                 .addContainerGap())
         );
 
@@ -299,6 +313,10 @@ public class JadwalUjian extends javax.swing.JFrame {
         deleteData("Present");
         TampilData();
     }//GEN-LAST:event_btnpresentActionPerformed
+
+    private void btndownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndownloadActionPerformed
+        downloadFile();
+    }//GEN-LAST:event_btndownloadActionPerformed
 
     public void cari(String key){
         Connection con = connectdb.tryConnect();
@@ -409,6 +427,37 @@ public class JadwalUjian extends javax.swing.JFrame {
         }
     }
     
+    public void downloadFile(){
+        try {
+            Connection conn = connectdb.tryConnect();
+            Statement stat = conn.createStatement();
+            String sql = "select uploadlaporan from ujian where nim='"+nim_mhs+"'";
+            ResultSet res = stat.executeQuery(sql);
+            
+            String namafile = String.format("Laporan_%s.pdf",nim_mhs);
+            File file = new File(namafile);
+            FileOutputStream output = new FileOutputStream(file);
+            
+            if(res.next()){
+                InputStream input = res.getBinaryStream("uploadlaporan");
+                byte[] buffer = new byte[1024];
+                
+                while(input.read(buffer)>0){
+                    output.write(buffer);
+                }
+            }
+            output.close();
+            
+            JOptionPane.showMessageDialog(null, "File Saved in " + file.getAbsoluteFile(), "pesan", JOptionPane.INFORMATION_MESSAGE);
+            
+            System.out.println(file.getAbsoluteFile());
+            
+            
+        }  catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -446,6 +495,7 @@ public class JadwalUjian extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnabsent;
+    private javax.swing.JButton btndownload;
     private javax.swing.JButton btnpresent;
     private javax.swing.JTextField caridata;
     private javax.swing.JButton jButton1;

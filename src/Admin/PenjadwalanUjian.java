@@ -6,6 +6,7 @@
 package Admin;
 import Main.MenuAdmin;
 import config.connectdb;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -247,7 +249,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
     }//GEN-LAST:event_btnkembaliActionPerformed
 
     private void btnunduhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnunduhActionPerformed
-        
+        downloadFile();
     }//GEN-LAST:event_btnunduhActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -270,6 +272,39 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnupdateActionPerformed
 
+    public void downloadFile(){
+        
+        try {
+            Connection conn = connectdb.tryConnect();
+            Statement stat = conn.createStatement();
+            String sql = "select uploadnilai from ujian where nim='"+nim+"'";
+            ResultSet res = stat.executeQuery(sql);
+            
+            String namafile = String.format("Nilai_%s.pdf",nim);
+            File file = new File(namafile);
+            FileOutputStream output = new FileOutputStream(file);
+            
+            if(res.next()){
+                InputStream input = res.getBinaryStream("uploadnilai");
+                byte[] buffer = new byte[1024];
+                
+                while(input.read(buffer)>0){
+                    output.write(buffer);
+                }
+            }
+            output.close();
+            
+            JOptionPane.showMessageDialog(null, "File Saved in " + file.getAbsoluteFile(), "pesan", JOptionPane.INFORMATION_MESSAGE);
+            
+            System.out.println(file.getAbsoluteFile());
+            
+            
+        }  catch (Exception ex) {
+            ex.printStackTrace();
+        } 
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
