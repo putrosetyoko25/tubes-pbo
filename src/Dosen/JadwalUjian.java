@@ -118,6 +118,8 @@ public class JadwalUjian extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         caridata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 caridataActionPerformed(evt);
@@ -128,8 +130,10 @@ public class JadwalUjian extends javax.swing.JFrame {
                 caridataKeyReleased(evt);
             }
         });
+        jPanel2.add(caridata, new org.netbeans.lib.awtextra.AbsoluteConstraints(637, 24, 155, 30));
 
         jLabel3.setText("Search");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 24, 49, 30));
 
         jButton1.setText("Kembali");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +141,7 @@ public class JadwalUjian extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 372, -1, 40));
 
         btnpresent.setText("Present");
         btnpresent.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +149,7 @@ public class JadwalUjian extends javax.swing.JFrame {
                 btnpresentActionPerformed(evt);
             }
         });
+        jPanel2.add(btnpresent, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, -1, 40));
 
         btnabsent.setText("Absent");
         btnabsent.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +157,7 @@ public class JadwalUjian extends javax.swing.JFrame {
                 btnabsentActionPerformed(evt);
             }
         });
+        jPanel2.add(btnabsent, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, -1, 40));
 
         tablejadwal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,54 +177,15 @@ public class JadwalUjian extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablejadwal);
 
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 782, 267));
+
         btnunduh.setText("Download Laporan");
         btnunduh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnunduhActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(caridata, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnunduh)
-                        .addGap(145, 145, 145)
-                        .addComponent(btnabsent)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnpresent)
-                        .addGap(43, 43, 43)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(caridata, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnpresent)
-                    .addComponent(btnabsent)
-                    .addComponent(btnunduh))
-                .addContainerGap())
-        );
+        jPanel2.add(btnunduh, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

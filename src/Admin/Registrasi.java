@@ -44,8 +44,9 @@ public class Registrasi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 567));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
+        jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
         lblNamaDosen.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         lblNamaDosen.setForeground(new java.awt.Color(255, 255, 255));
@@ -56,9 +57,9 @@ public class Registrasi extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(314, 314, 314)
+                .addGap(156, 156, 156)
                 .addComponent(lblNamaDosen)
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,8 +69,11 @@ public class Registrasi extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, 520, -1));
+
         jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel4.setText("Dosen");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, -1));
 
         btnadddosen.setBackground(new java.awt.Color(255, 255, 255));
         btnadddosen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/teacher-24.png"))); // NOI18N
@@ -78,6 +82,7 @@ public class Registrasi extends javax.swing.JFrame {
                 btnadddosenActionPerformed(evt);
             }
         });
+        getContentPane().add(btnadddosen, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 28, 47));
 
         btnaddadmin.setBackground(new java.awt.Color(255, 255, 255));
         btnaddadmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-list-24.png"))); // NOI18N
@@ -86,9 +91,11 @@ public class Registrasi extends javax.swing.JFrame {
                 btnaddadminActionPerformed(evt);
             }
         });
+        getContentPane().add(btnaddadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 28, 47));
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel5.setText("Admin");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
 
         btnkembali.setText("Kembali");
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
@@ -96,59 +103,11 @@ public class Registrasi extends javax.swing.JFrame {
                 btnkembaliActionPerformed(evt);
             }
         });
+        getContentPane().add(btnkembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 190, 36));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnadddosen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnkembali)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnaddadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnaddadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnadddosen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(7, 7, 7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(9, 9, 9)))))
-                .addGap(290, 290, 290)
-                .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        setSize(new java.awt.Dimension(855, 490));
+        setSize(new java.awt.Dimension(518, 410));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnadddosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadddosenActionPerformed
-        AddDosen frm = new AddDosen();
-        frm.setVisible(true);
-        this.setVisible(false);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_btnadddosenActionPerformed
 
     private void btnaddadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddadminActionPerformed
         AddAdmin frm = new AddAdmin();
@@ -157,6 +116,14 @@ public class Registrasi extends javax.swing.JFrame {
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_btnaddadminActionPerformed
+
+    private void btnadddosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadddosenActionPerformed
+        AddDosen frm = new AddDosen();
+        frm.setVisible(true);
+        this.setVisible(false);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btnadddosenActionPerformed
 
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
         MenuAdmin frm = new MenuAdmin();

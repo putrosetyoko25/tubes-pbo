@@ -68,6 +68,7 @@ public class Login extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -90,8 +91,8 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("SISTEM PKN");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, -1, -1));
+        jLabel5.setText("SISTEM Praktik Kerja Nyata");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,13 +124,13 @@ public class Login extends javax.swing.JFrame {
         txtpassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtpassword.setAlignmentX(0.0F);
         txtpassword.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        jPanel1.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 276, 226, 33));
+        jPanel1.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 226, 33));
 
         txtusername.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         txtusername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtusername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtusername.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jPanel1.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 189, 226, 33));
+        jPanel1.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 226, 33));
 
         btnlogin.setBackground(new java.awt.Color(153, 0, 0));
         btnlogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -145,15 +146,15 @@ public class Login extends javax.swing.JFrame {
                 btnloginKeyPressed(evt);
             }
         });
-        jPanel1.add(btnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 365, 226, 35));
+        jPanel1.add(btnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 226, 35));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel1.setText("Username");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 167, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         jLabel2.setText("Password");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 254, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(0, 102, 153));
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 1, 12)); // NOI18N
@@ -164,7 +165,7 @@ public class Login extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 320, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 0, 0));
@@ -195,7 +196,7 @@ public class Login extends javax.swing.JFrame {
                 checkboxpasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(checkboxpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 316, -1, -1));
+        jPanel1.add(checkboxpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, -1, -1));
 
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -230,6 +231,12 @@ public class Login extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btnmaximize.png"))); // NOI18N
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 20, 20));
+
+        jLabel14.setFont(new java.awt.Font("Tw Cen MT", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Copyright - 2021 Developed by Stay Coding team UMM");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 600, 540));
 
@@ -513,6 +520,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
