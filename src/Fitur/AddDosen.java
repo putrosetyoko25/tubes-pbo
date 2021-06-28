@@ -16,12 +16,17 @@ import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class AddDosen extends javax.swing.JFrame {
 
     boolean ceknama,ceknidn,cekkode,cekemail,cekpassword;
+    boolean cekdb;
     boolean cekfinal;
+    SendMail mail = new SendMail();
+    
     public AddDosen() {
         setResizable(false);
         initComponents();
@@ -379,8 +384,9 @@ public class AddDosen extends javax.swing.JFrame {
 
     private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
 
-        cekcek();
+        cekcek(); cekAkun();
         if(cekfinal){
+            if(cekdb){
             Connection con = connectdb.tryConnect();
             PreparedStatement ps;
             try{
@@ -394,8 +400,24 @@ public class AddDosen extends javax.swing.JFrame {
                 ps.setString(6, txtpassword.getText());
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Data Inserted");
+                String email = txtemail.getText();
+                String text = getText(txtnamadosen.getText(), txtnidn.getText(), txtkodedosen.getText(), txtemail.getText(), txtpassword.getText());
+                
+                Registrasi frm = new Registrasi();
+                frm.setVisible(true);
+                this.setVisible(false);
+                this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                this.dispose();
+                
+                mail.sendEmail(email, text);
+                
             }catch(HeadlessException | SQLException ex){
                 JOptionPane.showMessageDialog(null, "Data not Inserted");
+            }   catch (Exception ex) {
+                    Logger.getLogger(AddDosen.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Akun Sudah Terdaftar");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Terdapat Inputan yang Masih Error");
@@ -497,10 +519,46 @@ public class AddDosen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtnamadosenKeyReleased
 
+    public void cekAkun(){
+        try {
+            Connection conn = connectdb.tryConnect();
+            java.sql.Statement stmt = conn.createStatement();
+            String SQL = "select * from dosen";
+            java.sql.ResultSet res = stmt.executeQuery(SQL);
+            while (res.next()) {
+                String email = res.getString("email");
+
+                if(email.equals(txtemail.getText())){
+                    cekdb = false;
+                    break;
+                } else {
+                    cekdb = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
     public void cekcek(){
         cekfinal = ceknidn && cekkode && cekemail && cekpassword && ceknama;
     }
+    
+    public String getText(String nama, String nidn, String kode,String email, String password){
+     
+        String kirim = String.format("Selamat! Akun Sistem PKN Anda telah aktif. Berikut informasi akun Anda:\n" +
+    "\n" +
+    "\t\tNama\t\t\t%s\n" +
+    "\t\tNIDN\t\t\t%s\n" +
+    "\t\tKode Dosen\t\t%s\n" +
+    "\t\tUsername\t\t%s\n" +
+    "\t\tPassword\t\t%s\n" +
+    "Gunakan Username dan Password untuk proses login Aplikasi Sistem PKN.", nama, nidn, kode, email, password);
+        
+        return kirim;
+    }
+    
     /**
      * @param args the command line arguments
      */

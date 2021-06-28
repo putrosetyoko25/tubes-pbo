@@ -29,7 +29,8 @@ import javax.swing.JOptionPane;
  *
  */
 public class ReceiveMail {
-    String saveDirectory = "E:\\DataMail";
+    
+    String saveDirectory = "File\\ReceiveMail";
  
     /**
      * Sets the directory where attached files will be stored.
@@ -123,13 +124,4 @@ public class ReceiveMail {
         }
     }
  
-    /**
-     * Runs this program with Gmail POP3 server
-     */
-    public static void main(String[] args) {
-        
-        ReceiveMail receiver = new ReceiveMail();
-        receiver.Mail();
- 
-    }
 }

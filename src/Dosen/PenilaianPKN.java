@@ -8,13 +8,17 @@ package Dosen;
 import Main.MenuDosen;
 import config.connectdb;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +41,6 @@ public class PenilaianPKN extends javax.swing.JFrame {
         setResizable(false);
         dsnlogin();
         initComponents();
-        txtnim.setVisible(false);
         TampilData();
     }
 
@@ -55,14 +58,17 @@ public class PenilaianPKN extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        txtnilaidsn = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablenilai = new javax.swing.JTable();
-        txtnim = new javax.swing.JTextField();
         cari = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnunduh = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtnilailaporan = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtnilaidsn = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,38 +110,24 @@ public class PenilaianPKN extends javax.swing.JFrame {
             }
         });
 
-        txtnilaidsn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnilaidsnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtnilaidsn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtnilaidsn)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnBack))
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(jButton1)))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 0, 0));
@@ -179,12 +171,6 @@ public class PenilaianPKN extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablenilai);
 
-        txtnim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnimActionPerformed(evt);
-            }
-        });
-
         cari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cariActionPerformed(evt);
@@ -198,6 +184,23 @@ public class PenilaianPKN extends javax.swing.JFrame {
 
         jLabel3.setText("Search");
 
+        btnunduh.setText("Download Laporan");
+        btnunduh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnunduhActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Nilai Laporan");
+
+        jLabel2.setText("Nilai Ujian");
+
+        txtnilaidsn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnilaidsnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,26 +213,49 @@ public class PenilaianPKN extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtnim, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(239, 239, 239)
+                .addComponent(btnunduh)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtnilaidsn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtnilailaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnim)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cari, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(18, 18, 18)
+                .addComponent(btnunduh)
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtnilailaporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtnilaidsn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -295,9 +321,6 @@ public class PenilaianPKN extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
-        
-        txtnim.setText(tableadmin.getValueAt(baris, 0).toString());
     }//GEN-LAST:event_tablenilaiMouseClicked
 
     private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
@@ -314,21 +337,19 @@ public class PenilaianPKN extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cariKeyReleased
 
-    private void txtnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnimActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         double total;
-        double id_nilaiD = Double.parseDouble(txtnilaidsn.getText());
-        
+        double id_nilaiL = Double.parseDouble(txtnilailaporan.getText());
+        double id_nilaiU = Double.parseDouble(txtnilaidsn.getText());
+        double id_nilaiD = (id_nilaiL+id_nilaiU)/2;
         total = 0.6 * id_nilaiP + 0.4*id_nilaiD;
         
-        String input = String.format("%.2f", total);
+        String nilaiTotal = String.format("%.2f", total);
+        String nilaiD = String.format("%.2f", id_nilaiD);
         try {
             Connection conn = connectdb.tryConnect();
-            PreparedStatement stmt = conn.prepareStatement("update nilai set nilai_dsn='"+ txtnilaidsn.getText()+"', nilai_total='"+input+"' where nim='"+txtnim.getText()+"'");
+            PreparedStatement stmt = conn.prepareStatement("update nilai set nilai_dsn='"+ nilaiD+"', nilai_total='"+nilaiTotal+"' where nim='"+id_nim+"'");
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             TampilData();
@@ -337,6 +358,37 @@ public class PenilaianPKN extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnunduhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnunduhActionPerformed
+        try {
+            Connection conn = connectdb.tryConnect();
+            Statement stat = conn.createStatement();
+            String sql = "select uploadlaporan from ujian where nim='"+id_nim+"'";
+            ResultSet res = stat.executeQuery(sql);
+            
+            String namafile = String.format("File\\Laporan\\Laporan_%s.pdf",id_nim);
+            File file = new File(namafile);
+            FileOutputStream output = new FileOutputStream(file);
+            
+            if(res.next()){
+                InputStream input = res.getBinaryStream("uploadlaporan");
+                byte[] buffer = new byte[1024];
+                
+                while(input.read(buffer)>0){
+                    output.write(buffer);
+                }
+            }
+            output.close();
+            
+            JOptionPane.showMessageDialog(null, "File Saved in " + file.getAbsoluteFile(), "pesan", JOptionPane.INFORMATION_MESSAGE);
+            
+            System.out.println(file.getAbsoluteFile());
+            
+            
+        }  catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnunduhActionPerformed
 
     public void cariData(String key){
         Connection con = connectdb.tryConnect();
@@ -364,6 +416,38 @@ public class PenilaianPKN extends javax.swing.JFrame {
             Logger.getLogger(JadwalUjian.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void downloadFile(){
+        try {
+            Connection conn = connectdb.tryConnect();
+            Statement stat = conn.createStatement();
+            String sql = "select uploadlaporan from ujian where nim='"+id_nim+"'";
+            ResultSet res = stat.executeQuery(sql);
+            
+            String namafile = String.format("Laporan_%s.pdf",id_nim);
+            File file = new File(namafile);
+            FileOutputStream output = new FileOutputStream(file);
+            
+            if(res.next()){
+                InputStream input = res.getBinaryStream("uploadlaporan");
+                byte[] buffer = new byte[1024];
+                
+                while(input.read(buffer)>0){
+                    output.write(buffer);
+                }
+            }
+            output.close();
+            
+            JOptionPane.showMessageDialog(null, "File Saved in " + file.getAbsoluteFile(), "pesan", JOptionPane.INFORMATION_MESSAGE);
+            
+            System.out.println(file.getAbsoluteFile());
+            
+            
+        }  catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     
     /**
      * @param args the command line arguments
@@ -402,10 +486,13 @@ public class PenilaianPKN extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnunduh;
     private javax.swing.JTextField cari;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -413,7 +500,7 @@ public class PenilaianPKN extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablenilai;
     private javax.swing.JTextField txtnilaidsn;
-    private javax.swing.JTextField txtnim;
+    private javax.swing.JTextField txtnilailaporan;
     // End of variables declaration//GEN-END:variables
 
     public void dsnlogin(){

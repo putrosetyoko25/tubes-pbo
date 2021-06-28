@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.JOptionPane;
 
 
 public class SendMail {
@@ -78,11 +79,11 @@ public class SendMail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(email));
             message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(reception));
-            message.setSubject("Informasi Akun Sistem PKN Mahasiswa");
+            message.setSubject("Informasi Aplikasi Sistem PKN");
             message.setText(text);
              
             Transport.send(message);
-            System.out.println("Mail sent successfully!!!");
+            JOptionPane.showMessageDialog(null, "Email Sended", "Pesan", JOptionPane.INFORMATION_MESSAGE);
 
         
     }

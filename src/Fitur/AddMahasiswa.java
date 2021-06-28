@@ -23,7 +23,8 @@ import javax.swing.JOptionPane;
 public class AddMahasiswa extends javax.swing.JFrame {
 
     boolean ceknama, ceknim, ceknophone, cekemail, cekpassword, cekfinal;
-    static SendMail mail;
+    boolean cekdb;
+    SendMail mail;
     
     public AddMahasiswa() {
         setResizable(false);
@@ -389,36 +390,40 @@ public class AddMahasiswa extends javax.swing.JFrame {
 
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
         mail = new SendMail();
-        cekcek();
+        cekcek(); cekAkun();
         if(cekfinal){
-            Connection con = connectdb.tryConnect();
-            PreparedStatement ps;
-            try{
-                String sql = ("insert into mahasiswa values(?,?,?,?,?,?,?)");
-                ps  = con.prepareStatement(sql);
-                ps.setString(1, txtnim.getText());
-                ps.setString(2, txtnama.getText());
-                ps.setString(3, (String) cmbjenkel.getSelectedItem());
-                ps.setString(4, txtalamat.getText());
-                ps.setString(5, txtnophone.getText());
-                ps.setString(6, txtemail.getText());
-                ps.setString(7, txtpassword.getText());
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Data Inserted");
-                String text = getText(txtnama.getText(), txtnim.getText(),txtnophone.getText(), txtpassword.getText());
-                String email = txtemail.getText();
-                clear();
-                mail.sendEmail(email, text);
-                JOptionPane.showMessageDialog(null, "We Sent a Mail to your account : " + email);
-                Login frm = new Login();
-                frm.setVisible(true);
-                this.setVisible(false);
-                this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-                this.dispose();
-            }catch(HeadlessException | SQLException ex){
-                JOptionPane.showMessageDialog(null, "Data not Inserted");
-            } catch (Exception ex) {
-                Logger.getLogger(AddMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
+            if(cekdb){
+                Connection con = connectdb.tryConnect();
+                PreparedStatement ps;
+                try{
+                    String sql = ("insert into mahasiswa values(?,?,?,?,?,?,?)");
+                    ps  = con.prepareStatement(sql);
+                    ps.setString(1, txtnim.getText());
+                    ps.setString(2, txtnama.getText());
+                    ps.setString(3, (String) cmbjenkel.getSelectedItem());
+                    ps.setString(4, txtalamat.getText());
+                    ps.setString(5, txtnophone.getText());
+                    ps.setString(6, txtemail.getText());
+                    ps.setString(7, txtpassword.getText());
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Data Inserted");
+                    String text = getText(txtnama.getText(), txtnim.getText(),txtnophone.getText(), txtpassword.getText());
+                    String email = txtemail.getText();
+                    clear();
+                    mail.sendEmail(email, text);
+                    JOptionPane.showMessageDialog(null, "We Sent a Mail to your account : " + email);
+                    Login frm = new Login();
+                    frm.setVisible(true);
+                    this.setVisible(false);
+                    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+                    this.dispose();
+                }catch(HeadlessException | SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Data not Inserted");
+                } catch (Exception ex) {
+                    Logger.getLogger(AddMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else{
+                JOptionPane.showMessageDialog(null, "Akun Sudah Terdaftar");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Terdapat Inputan yang Masih Error");
@@ -502,6 +507,27 @@ public class AddMahasiswa extends javax.swing.JFrame {
             cekfinal = true;
         } else {
             cekfinal = false;
+        }
+    }
+    
+    public void cekAkun(){
+        try {
+            Connection conn = connectdb.tryConnect();
+            java.sql.Statement stmt = conn.createStatement();
+            String SQL = "select * from mahasiswa";
+            java.sql.ResultSet res = stmt.executeQuery(SQL);
+            while (res.next()) {
+                String nim = res.getString("nim");
+
+                if(nim.equals(txtnim.getText())){
+                    cekdb = false;
+                    break;
+                } else {
+                    cekdb = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

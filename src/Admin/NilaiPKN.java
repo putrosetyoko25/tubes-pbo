@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package Admin;
+import Fitur.SendMail;
 import Main.MenuAdmin;
 import config.connectdb;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -83,6 +86,7 @@ public class NilaiPKN extends javax.swing.JFrame {
         cari = new javax.swing.JTextField();
         txtnim = new javax.swing.JTextField();
         btnsendmail = new javax.swing.JButton();
+        btnclear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,6 +159,13 @@ public class NilaiPKN extends javax.swing.JFrame {
             }
         });
 
+        btnclear.setText("Clear Nilai");
+        btnclear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnclearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,6 +176,8 @@ public class NilaiPKN extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnkembali)
+                        .addGap(235, 235, 235)
+                        .addComponent(btnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnsendmail, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
@@ -190,7 +203,9 @@ public class NilaiPKN extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnkembali, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnsendmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -230,21 +245,40 @@ public class NilaiPKN extends javax.swing.JFrame {
         id_nilaiD = tableadmin.getValueAt(baris, 4).toString();
         id_nilaifix = tableadmin.getValueAt(baris, 5).toString();
         
-        System.out.println(id_nim + id_nama+id_email+id_nilaiP+id_nilaiD+ id_nilaifix);
         txtnim.setText(tableadmin.getValueAt(baris, 0).toString());
     }//GEN-LAST:event_tablenilaiMouseClicked
 
     private void btnsendmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsendmailActionPerformed
         try {
+            SendMail mail = new SendMail();
             Connection conn = connectdb.tryConnect();
             PreparedStatement stmt = conn.prepareStatement("update nilai set status='Sended' where nim='"+id_nim+"'");
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Email Sended", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            String text = getText(id_nama,id_nim,id_nilaiP,id_nilaiD,id_nilaifix);
+            mail.sendEmail(id_email, text);
             TampilData();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(NilaiPKN.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnsendmailActionPerformed
+
+    private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
+        Connection con = connectdb.tryConnect();
+        try
+         {
+            String sql="delete from nilai";
+            PreparedStatement st=con.prepareStatement(sql);
+            st.executeUpdate();
+         }
+        catch (Exception e)
+        {
+            System.out.println("Gagal");
+        } finally{
+            TampilData();
+        }
+    }//GEN-LAST:event_btnclearActionPerformed
 
     public void cariData(String key){
         tableadmin = new DefaultTableModel();
@@ -276,6 +310,20 @@ public class NilaiPKN extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public String getText(String nama, String nim,String nilai1, String nilai2, String nilai3){
+     
+        String kirim = String.format("Selamat! Nilai PKN anda sudah keluar. Berikut informasi nilai Anda:\n" +
+    "\n" +
+    "\t\tNama Mahasiswa\t\t%s\n" +
+    "\t\tNIM Mahasiswa\t\t%s\n" +
+    "\t\tNilai Perusahaan\t%s\n" +
+    "\t\tNilai Ujian\t\t%s\n" +
+    "\t\tNilai Final\t\t%s\n" +
+    "Gunakan Username dan Password untuk proses login Aplikasi Sistem PKN.", nama, nim,nilai1, nilai2, nilai3);
+        
+        return kirim;
     }
     
     /**
@@ -314,6 +362,7 @@ public class NilaiPKN extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnclear;
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnsendmail;
     private javax.swing.JTextField cari;

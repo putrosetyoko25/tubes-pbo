@@ -66,7 +66,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         btnabsent = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablejadwal = new javax.swing.JTable();
-        btndownload = new javax.swing.JButton();
+        btnunduh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 400));
@@ -170,10 +170,10 @@ public class JadwalUjian extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablejadwal);
 
-        btndownload.setText("Download Laporan");
-        btndownload.addActionListener(new java.awt.event.ActionListener() {
+        btnunduh.setText("Download Laporan");
+        btnunduh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btndownloadActionPerformed(evt);
+                btnunduhActionPerformed(evt);
             }
         });
 
@@ -193,8 +193,8 @@ public class JadwalUjian extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btndownload)
-                        .addGap(176, 176, 176)
+                        .addComponent(btnunduh)
+                        .addGap(145, 145, 145)
                         .addComponent(btnabsent)
                         .addGap(18, 18, 18)
                         .addComponent(btnpresent)
@@ -215,7 +215,7 @@ public class JadwalUjian extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(btnpresent)
                     .addComponent(btnabsent)
-                    .addComponent(btndownload))
+                    .addComponent(btnunduh))
                 .addContainerGap())
         );
 
@@ -291,10 +291,12 @@ public class JadwalUjian extends javax.swing.JFrame {
     }//GEN-LAST:event_caridataKeyReleased
 
     private void btnabsentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabsentActionPerformed
+        ambilData();
         Object[] options = {"Iya","Batal"};
         int n = JOptionPane.showOptionDialog(null,nama_mhs + " tidak hadir?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
         if(n == JOptionPane.YES_OPTION){
-            deleteData("Absent");
+//            deleteData();
+            insertArsip("Absent");
             TampilData();
         }
     }//GEN-LAST:event_btnabsentActionPerformed
@@ -310,13 +312,41 @@ public class JadwalUjian extends javax.swing.JFrame {
     private void btnpresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpresentActionPerformed
         ambilData();
         insertData();
-        deleteData("Present");
+//        deleteData();
+        insertArsip("Present");
         TampilData();
     }//GEN-LAST:event_btnpresentActionPerformed
 
-    private void btndownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndownloadActionPerformed
-        downloadFile();
-    }//GEN-LAST:event_btndownloadActionPerformed
+    private void btnunduhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnunduhActionPerformed
+        try {
+            Connection conn = connectdb.tryConnect();
+            Statement stat = conn.createStatement();
+            String sql = "select uploadlaporan from ujian where nim='"+nim_mhs+"'";
+            ResultSet res = stat.executeQuery(sql);
+            
+            String namafile = String.format("File\\Laporan\\Laporan_%s.pdf",nim_mhs);
+            File file = new File(namafile);
+            FileOutputStream output = new FileOutputStream(file);
+            
+            if(res.next()){
+                InputStream input = res.getBinaryStream("uploadlaporan");
+                byte[] buffer = new byte[1024];
+                
+                while(input.read(buffer)>0){
+                    output.write(buffer);
+                }
+            }
+            output.close();
+            
+            JOptionPane.showMessageDialog(null, "File Saved in " + file.getAbsoluteFile(), "pesan", JOptionPane.INFORMATION_MESSAGE);
+            
+            System.out.println(file.getAbsoluteFile());
+            
+            
+        }  catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnunduhActionPerformed
 
     public void cari(String key){
         Connection con = connectdb.tryConnect();
@@ -370,7 +400,7 @@ public class JadwalUjian extends javax.swing.JFrame {
            }
     }
     
-    public void deleteData(String status){
+    public void deleteData(){
         Connection con = connectdb.tryConnect();
         try
          {
@@ -378,16 +408,25 @@ public class JadwalUjian extends javax.swing.JFrame {
             PreparedStatement st=con.prepareStatement(sql);
             st.executeUpdate();
             
-            PreparedStatement ps = con.prepareStatement("insert info arsip_attendance values(?,?,?,?)");
-               ps.setString(1, nim_mhs);
-               ps.setString(2, nama_mhs);
-               ps.setString(3, email_mhs);
-               ps.setString(4, status);
          }
         catch (Exception e)
         {
             System.out.println("Gagal");
         }
+    }
+    
+    public void insertArsip(String status){
+        try {
+        Connection con = connectdb.tryConnect();
+        PreparedStatement ps = con.prepareStatement("insert into arsip values(?,?,?,?)");
+               ps.setString(1, nim_mhs);
+               ps.setString(2, nama_mhs);
+               ps.setString(3, email_mhs);
+               ps.setString(4, status);
+               ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(JadwalUjian.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
         
     public void ambilData(){
@@ -427,36 +466,6 @@ public class JadwalUjian extends javax.swing.JFrame {
         }
     }
     
-    public void downloadFile(){
-        try {
-            Connection conn = connectdb.tryConnect();
-            Statement stat = conn.createStatement();
-            String sql = "select uploadlaporan from ujian where nim='"+nim_mhs+"'";
-            ResultSet res = stat.executeQuery(sql);
-            
-            String namafile = String.format("Laporan_%s.pdf",nim_mhs);
-            File file = new File(namafile);
-            FileOutputStream output = new FileOutputStream(file);
-            
-            if(res.next()){
-                InputStream input = res.getBinaryStream("uploadlaporan");
-                byte[] buffer = new byte[1024];
-                
-                while(input.read(buffer)>0){
-                    output.write(buffer);
-                }
-            }
-            output.close();
-            
-            JOptionPane.showMessageDialog(null, "File Saved in " + file.getAbsoluteFile(), "pesan", JOptionPane.INFORMATION_MESSAGE);
-            
-            System.out.println(file.getAbsoluteFile());
-            
-            
-        }  catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
     
     /**
      * @param args the command line arguments
@@ -495,8 +504,8 @@ public class JadwalUjian extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnabsent;
-    private javax.swing.JButton btndownload;
     private javax.swing.JButton btnpresent;
+    private javax.swing.JButton btnunduh;
     private javax.swing.JTextField caridata;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

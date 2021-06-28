@@ -48,6 +48,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         try {
             java.sql.Statement stmt = conn.createStatement();
             java.sql.ResultSet res = stmt.executeQuery("select * from dosen");
+                cmbdsn.addItem("Blokir");
             while (res.next()) {
                 String nama = res.getString("nama_dsn");
                 cmbdsn.addItem(nama);
@@ -280,7 +281,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
             String sql = "select uploadnilai from ujian where nim='"+nim+"'";
             ResultSet res = stat.executeQuery(sql);
             
-            String namafile = String.format("Nilai_%s.pdf",nim);
+            String namafile = String.format("File\\Nilai\\Nilai_%s.pdf",nim);
             File file = new File(namafile);
             FileOutputStream output = new FileOutputStream(file);
             
