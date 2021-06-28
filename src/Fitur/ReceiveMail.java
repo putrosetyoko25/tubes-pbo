@@ -6,6 +6,7 @@
 package Fitur;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
  
@@ -31,7 +32,7 @@ import javax.swing.JOptionPane;
 public class ReceiveMail {
     
     String saveDirectory = "File\\ReceiveMail";
- 
+    
     /**
      * Sets the directory where attached files will be stored.
      * @param dir absolute path of the directory
@@ -44,7 +45,6 @@ public class ReceiveMail {
      * @param password
      */
     public void Mail() {
-        
         
         String userName = "staycoding.m@gmail.com";
         String password = "codingcoding";

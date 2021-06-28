@@ -34,6 +34,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         setResizable(false);
         initComponents();
+        createFolder();
     }
 
     /**
@@ -236,6 +237,25 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void createFolder(){
+        try {
+            FileWriter file = new FileWriter("File\\ReceiveMail\\file.txt");
+            file.write("Folder ini dipakai untuk menerima email dari instansi yang terkait");
+            file.close();
+            
+            FileWriter file1 = new FileWriter("File\\Laporan\\file.txt");
+            file1.write("Folder ini dipakai untuk Mendownload file Laporan Mahasiswa yang ada di Database");
+            file1.close();
+            
+            FileWriter file2 = new FileWriter("File\\Nilai\\file.txt");
+            file2.write("Folder ini dipakai untuk Mendownload file Nilai Perusahaan yang ada di Database");
+            file2.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         
         Connection con = connectdb.tryConnect();
