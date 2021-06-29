@@ -61,8 +61,6 @@ public class DaftarUjian extends javax.swing.JFrame {
         btnfilenilai = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtnilai = new javax.swing.JTextField();
-        btnsubmit = new javax.swing.JButton();
-        btnsubmit1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         btnfilenilai1 = new javax.swing.JButton();
         txtfilenilai = new javax.swing.JTextField();
@@ -70,6 +68,8 @@ public class DaftarUjian extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JLabel();
+        btnSubmit = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -97,6 +97,7 @@ public class DaftarUjian extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -136,20 +137,6 @@ public class DaftarUjian extends javax.swing.JFrame {
             }
         });
 
-        btnsubmit.setText("Submit");
-        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsubmitActionPerformed(evt);
-            }
-        });
-
-        btnsubmit1.setText("Kembali");
-        btnsubmit1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsubmit1ActionPerformed(evt);
-            }
-        });
-
         jLabel12.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel12.setText("Upload Laporan");
 
@@ -171,6 +158,24 @@ public class DaftarUjian extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 0, 0));
         jLabel7.setText("*format file : pdf");
+
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/arrow-92-24.png"))); // NOI18N
+        btnBack.setText("Kembali");
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+        });
+
+        btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/telegram-24.png"))); // NOI18N
+        btnSubmit.setText("Submit");
+        btnSubmit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSubmitMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -203,15 +208,19 @@ public class DaftarUjian extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(14, 613, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnsubmit1)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnsubmit)))
-                .addContainerGap())
+                        .addComponent(btnSubmit)
+                        .addGap(32, 32, 32))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,11 +254,11 @@ public class DaftarUjian extends javax.swing.JFrame {
                         .addComponent(txtfilelaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(30, 30, 30)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnsubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 0, 0));
@@ -279,64 +288,20 @@ public class DaftarUjian extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(674, 398));
+        setSize(new java.awt.Dimension(658, 354));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnsubmit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmit1ActionPerformed
-        MenuMahasiswa frm = new MenuMahasiswa();
-        frm.setVisible(true);
-        this.setVisible(false);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_btnsubmit1ActionPerformed
-
-    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
-        Object[] options = {"Iya","Batal"};
-                int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin Submit?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
-                if(n == JOptionPane.YES_OPTION){
-                    Connection con = connectdb.tryConnect();
-        PreparedStatement ps;
-        try{
-               String sql = ("insert into ujian values(?,?,?,?,?,?,?,?)");
-               ps  = con.prepareStatement(sql);
-               InputStream is1 = new FileInputStream(new File(uploadNilai));
-               InputStream is2 = new FileInputStream(new File(uploadLaporan));
-               ps.setString(1, nim_mhs);
-               ps.setString(2, nama_mhs);
-               ps.setString(3, email_mhs);
-               ps.setBlob(4,is1); 
-               ps.setString(5, txtnilai.getText());
-               ps.setBlob(6,is2);
-               ps.setString(7, "-");
-               ps.setString(8, "-");
-               
-               
-               
-               ps.executeUpdate();
-               JOptionPane.showMessageDialog(null, "Data Inserted");
-               //SendMail.sendEmail(txtemail.getText(), cv, "Curiculum Vitae");
-              
-           }catch(Exception ex){
-               JOptionPane.showMessageDialog(null, "Data not Inserted");
-           }
-                }
-                
-        
-        
-    }//GEN-LAST:event_btnsubmitActionPerformed
 
     private void btnfilenilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfilenilaiActionPerformed
         JFileChooser fileChooser = new JFileChooser();
@@ -375,6 +340,48 @@ public class DaftarUjian extends javax.swing.JFrame {
              System.out.println("Tidak ada yang di pilih.");
          }
     }//GEN-LAST:event_btnfilenilai1ActionPerformed
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+        MenuMahasiswa frm = new MenuMahasiswa();
+        frm.setVisible(true);
+        this.setVisible(false);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btnBackMouseClicked
+
+    private void btnSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitMouseClicked
+        Object[] options = {"Iya","Batal"};
+                int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin Submit?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
+                if(n == JOptionPane.YES_OPTION){
+                    Connection con = connectdb.tryConnect();
+        PreparedStatement ps;
+        try{
+               String sql = ("insert into ujian values(?,?,?,?,?,?,?,?)");
+               ps  = con.prepareStatement(sql);
+               InputStream is1 = new FileInputStream(new File(uploadNilai));
+               InputStream is2 = new FileInputStream(new File(uploadLaporan));
+               ps.setString(1, nim_mhs);
+               ps.setString(2, nama_mhs);
+               ps.setString(3, email_mhs);
+               ps.setBlob(4,is1); 
+               ps.setString(5, txtnilai.getText());
+               ps.setBlob(6,is2);
+               ps.setString(7, "-");
+               ps.setString(8, "-");
+               
+               
+               
+               ps.executeUpdate();
+               JOptionPane.showMessageDialog(null, "Data Inserted");
+               //SendMail.sendEmail(txtemail.getText(), cv, "Curiculum Vitae");
+              
+           }catch(Exception ex){
+               JOptionPane.showMessageDialog(null, "Data not Inserted");
+           }
+                }
+                
+        
+    }//GEN-LAST:event_btnSubmitMouseClicked
 
     public void mhslogin(){
         FileReader file;
@@ -431,10 +438,10 @@ public class DaftarUjian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnBack;
+    private javax.swing.JLabel btnSubmit;
     private javax.swing.JButton btnfilenilai;
     private javax.swing.JButton btnfilenilai1;
-    private javax.swing.JButton btnsubmit;
-    private javax.swing.JButton btnsubmit1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

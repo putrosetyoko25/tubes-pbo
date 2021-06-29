@@ -80,16 +80,12 @@ public class Proposal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnfilecv = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnfileportfolio = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtemail = new javax.swing.JTextField();
-        btnkembali = new javax.swing.JButton();
-        btnsubmit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txttempatpkn = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
@@ -99,8 +95,11 @@ public class Proposal extends javax.swing.JFrame {
         txtportfolio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JLabel();
+        btnSubmit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
@@ -127,23 +126,6 @@ public class Proposal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Tw Cen MT", 1, 12)); // NOI18N
-        jLabel2.setText("Input");
-
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel3.setPreferredSize(new java.awt.Dimension(100, 2));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
-        );
-
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel3.setText("Curiculum Vitae");
 
@@ -166,20 +148,6 @@ public class Proposal extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
         jLabel5.setText("Email Instansi");
-
-        btnkembali.setText("Kembali");
-        btnkembali.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnkembaliActionPerformed(evt);
-            }
-        });
-
-        btnsubmit.setText("Submit");
-        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsubmitActionPerformed(evt);
-            }
-        });
 
         txttempatpkn.setColumns(20);
         txttempatpkn.setRows(5);
@@ -205,6 +173,24 @@ public class Proposal extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(153, 0, 0));
         jLabel11.setText("*format file : pdf");
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/arrow-92-24.png"))); // NOI18N
+        btnBack.setText("Kembali");
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+        });
+
+        btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/telegram-24.png"))); // NOI18N
+        btnSubmit.setText("Submit");
+        btnSubmit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSubmitMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -212,7 +198,6 @@ public class Proposal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,23 +236,17 @@ public class Proposal extends javax.swing.JFrame {
                                         .addGap(32, 32, 32)
                                         .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(0, 31, Short.MAX_VALUE))
+                        .addContainerGap(41, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(btnkembali))
+                        .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnsubmit)))
-                .addContainerGap())
+                        .addComponent(btnSubmit)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtcv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,11 +273,11 @@ public class Proposal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jwaktupkn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -312,100 +291,97 @@ public class Proposal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(581, 543));
+        setSize(new java.awt.Dimension(565, 459));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
+    private void btnSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitMouseClicked
+        Object[] options = {"Iya","Batal"};
+        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin keluar?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
+        if(n == JOptionPane.YES_OPTION){
+            Connection con = connectdb.tryConnect();
+            PreparedStatement ps;
+            try{
+                String sql = ("insert into proposal values(?,?,?,?,?,?,?,?,?)");
+                ps  = con.prepareStatement(sql);
+                InputStream is1 = new FileInputStream(new File(cv));
+                InputStream is2 = new FileInputStream(new File(portfolio));
+                //ps.setString(1, txtidproposal.getText());
+                ps.setString(1, nim_mhs);
+                ps.setString(2, nama_mhs);
+                ps.setString(3, email_mhs);
+                ps.setBlob(4,is1);
+                ps.setBlob(5,is2);
+                ps.setString(6, txtemail.getText());
+                ps.setString(7, txttempatpkn.getText());
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+                String tanggal = String.valueOf(format.format(jwaktupkn.getDate()));
+                ps.setString(8, tanggal);
+                ps.setString(9, "-");
+
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data Inserted");
+                SendMail.sendEmail(txtemail.getText(), cv, "Curiculum Vitae");
+                SendMail.sendEmail(txtemail.getText(), portfolio, "Portfolio");
+
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "Data not Inserted");
+            }
+        }
+    }//GEN-LAST:event_btnSubmitMouseClicked
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         MenuMahasiswa frm = new MenuMahasiswa();
-        System.out.println(getNim());
         frm.setVisible(true);
         this.setVisible(false);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_btnkembaliActionPerformed
-
-    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
-        Object[] options = {"Iya","Batal"};
-        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin keluar?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
-        if(n == JOptionPane.YES_OPTION){
-            Connection con = connectdb.tryConnect();
-        PreparedStatement ps;
-        try{
-               String sql = ("insert into proposal values(?,?,?,?,?,?,?,?,?)");
-               ps  = con.prepareStatement(sql);
-               InputStream is1 = new FileInputStream(new File(cv));
-               InputStream is2 = new FileInputStream(new File(portfolio));
-               //ps.setString(1, txtidproposal.getText());
-               ps.setString(1, nim_mhs);
-               ps.setString(2, nama_mhs);
-               ps.setString(3, email_mhs);
-               ps.setBlob(4,is1);
-               ps.setBlob(5,is2);
-               ps.setString(6, txtemail.getText());
-               ps.setString(7, txttempatpkn.getText());
-               SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
-               String tanggal = String.valueOf(format.format(jwaktupkn.getDate()));
-               ps.setString(8, tanggal);
-               ps.setString(9, "-");
-               
-               ps.executeUpdate();
-               JOptionPane.showMessageDialog(null, "Data Inserted");
-               SendMail.sendEmail(txtemail.getText(), cv, "Curiculum Vitae");
-               SendMail.sendEmail(txtemail.getText(), portfolio, "Portfolio");
-              
-           }catch(Exception ex){
-               JOptionPane.showMessageDialog(null, "Data not Inserted");
-        }
-        }
-       
-        
-    }//GEN-LAST:event_btnsubmitActionPerformed
-
-    private void btnfilecvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfilecvActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("Pdf file(.pdf)", "pdf");
-         fileChooser.addChoosableFileFilter(filter);
-         int result = fileChooser.showSaveDialog(null);
-         if(result == JFileChooser.APPROVE_OPTION){
-             File selectedFile = fileChooser.getSelectedFile();
-             cv = selectedFile.getAbsolutePath();
-             txtcv.setText(cv);
-             txtcv.setEditable(false);
-             int panjang = txtcv.getText().length();
-             System.out.println(txtcv.getText().substring(panjang-4,panjang));
-             if(txtcv.getText().substring(panjang-4,panjang).equals(".pdf")){
-                 System.out.println("Hai");
-             } else {
-                 JOptionPane.showMessageDialog(null, "Hanya menerima .pdf");
-             }
-             }
-         else if(result == JFileChooser.CANCEL_OPTION){
-             System.out.println("Tidak ada yang di pilih.");
-         }
-    }//GEN-LAST:event_btnfilecvActionPerformed
+    }//GEN-LAST:event_btnBackMouseClicked
 
     private void btnfileportfolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfileportfolioActionPerformed
         JFileChooser fileChooser = new JFileChooser();
-         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("Pdf file(.pdf)", "pdf");
-         fileChooser.addChoosableFileFilter(filter);
-         int result = fileChooser.showSaveDialog(null);
-         if(result == JFileChooser.APPROVE_OPTION){
-             File selectedFile = fileChooser.getSelectedFile();
-             portfolio = selectedFile.getAbsolutePath();
-             txtportfolio.setText(portfolio);
-             txtportfolio.setEditable(false);
-              }
-         else if(result == JFileChooser.CANCEL_OPTION){
-             System.out.println("Tidak ada yang di pilih.");
-         }
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Pdf file(.pdf)", "pdf");
+        fileChooser.addChoosableFileFilter(filter);
+        int result = fileChooser.showSaveDialog(null);
+        if(result == JFileChooser.APPROVE_OPTION){
+            File selectedFile = fileChooser.getSelectedFile();
+            portfolio = selectedFile.getAbsolutePath();
+            txtportfolio.setText(portfolio);
+            txtportfolio.setEditable(false);
+        }
+        else if(result == JFileChooser.CANCEL_OPTION){
+            System.out.println("Tidak ada yang di pilih.");
+        }
     }//GEN-LAST:event_btnfileportfolioActionPerformed
+
+    private void btnfilecvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfilecvActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Pdf file(.pdf)", "pdf");
+        fileChooser.addChoosableFileFilter(filter);
+        int result = fileChooser.showSaveDialog(null);
+        if(result == JFileChooser.APPROVE_OPTION){
+            File selectedFile = fileChooser.getSelectedFile();
+            cv = selectedFile.getAbsolutePath();
+            txtcv.setText(cv);
+            txtcv.setEditable(false);
+            int panjang = txtcv.getText().length();
+            System.out.println(txtcv.getText().substring(panjang-4,panjang));
+            if(txtcv.getText().substring(panjang-4,panjang).equals(".pdf")){
+                System.out.println("Hai");
+            } else {
+                JOptionPane.showMessageDialog(null, "Hanya menerima .pdf");
+            }
+        }
+        else if(result == JFileChooser.CANCEL_OPTION){
+            System.out.println("Tidak ada yang di pilih.");
+        }
+    }//GEN-LAST:event_btnfilecvActionPerformed
 
    public void mhslogin(){
         FileReader file;
@@ -464,14 +440,13 @@ public class Proposal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnBack;
+    private javax.swing.JLabel btnSubmit;
     private javax.swing.JButton btnfilecv;
     private javax.swing.JButton btnfileportfolio;
-    private javax.swing.JButton btnkembali;
-    private javax.swing.JButton btnsubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -479,7 +454,6 @@ public class Proposal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jwaktupkn;
     private javax.swing.JTextField txtcv;
