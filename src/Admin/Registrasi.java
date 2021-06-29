@@ -36,15 +36,14 @@ public class Registrasi extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblNamaDosen = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btnadddosen = new javax.swing.JButton();
-        btnaddadmin = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        btnkembali = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnDosen = new javax.swing.JLabel();
+        btnAdmin = new javax.swing.JLabel();
+        lblBack = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 567));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
@@ -69,69 +68,129 @@ public class Registrasi extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, 520, -1));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
-        jLabel4.setText("Dosen");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, -1));
-
-        btnadddosen.setBackground(new java.awt.Color(255, 255, 255));
-        btnadddosen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/teacher-24.png"))); // NOI18N
-        btnadddosen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnadddosenActionPerformed(evt);
+        btnDosen.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        btnDosen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/—Pngtree—vector lecturer icon_4233329.png"))); // NOI18N
+        btnDosen.setText("Dosen");
+        btnDosen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDosenMouseClicked(evt);
             }
         });
-        getContentPane().add(btnadddosen, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 28, 47));
 
-        btnaddadmin.setBackground(new java.awt.Color(255, 255, 255));
-        btnaddadmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-list-24.png"))); // NOI18N
-        btnaddadmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnaddadminActionPerformed(evt);
+        btnAdmin.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        btnAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/—Pngtree—vector lock icon_3991608.png"))); // NOI18N
+        btnAdmin.setText("Admin");
+        btnAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdminMouseClicked(evt);
             }
         });
-        getContentPane().add(btnaddadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 28, 47));
 
-        jLabel5.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
-        jLabel5.setText("Admin");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
-
-        btnkembali.setText("Kembali");
-        btnkembali.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnkembaliActionPerformed(evt);
+        lblBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/arrow-92-24.png"))); // NOI18N
+        lblBack.setText("Kembali");
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
             }
         });
-        getContentPane().add(btnkembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 190, 36));
 
-        setSize(new java.awt.Dimension(518, 410));
+        jPanel3.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel3.setPreferredSize(new java.awt.Dimension(502, 10));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBack)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addComponent(btnDosen)
+                .addGap(73, 73, 73)
+                .addComponent(btnAdmin)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDosen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(lblBack, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        setSize(new java.awt.Dimension(524, 324));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnaddadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddadminActionPerformed
-        AddAdmin frm = new AddAdmin();
-        frm.setVisible(true);
-        this.setVisible(false);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_btnaddadminActionPerformed
-
-    private void btnadddosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadddosenActionPerformed
-        AddDosen frm = new AddDosen();
-        frm.setVisible(true);
-        this.setVisible(false);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_btnadddosenActionPerformed
-
-    private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
         MenuAdmin frm = new MenuAdmin();
         frm.setVisible(true);
         this.setVisible(false);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_btnkembaliActionPerformed
+    }//GEN-LAST:event_lblBackMouseClicked
+
+    private void btnDosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDosenMouseClicked
+        AddDosen frm = new AddDosen();
+        frm.setVisible(true);
+        this.setVisible(false);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();       
+    }//GEN-LAST:event_btnDosenMouseClicked
+
+    private void btnAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdminMouseClicked
+        AddAdmin frm = new AddAdmin();
+        frm.setVisible(true);
+        this.setVisible(false);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();        
+    }//GEN-LAST:event_btnAdminMouseClicked
 
     /**
      * @param args the command line arguments
@@ -170,12 +229,12 @@ public class Registrasi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnaddadmin;
-    private javax.swing.JButton btnadddosen;
-    private javax.swing.JButton btnkembali;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel btnAdmin;
+    private javax.swing.JLabel btnDosen;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblNamaDosen;
     // End of variables declaration//GEN-END:variables
 }
