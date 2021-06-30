@@ -115,6 +115,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(450, 53));
@@ -259,7 +260,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(816, 509));
+        setSize(new java.awt.Dimension(800, 470));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -56,6 +56,7 @@ public class MenuDosen extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(153, 0, 0));
@@ -198,7 +199,7 @@ public class MenuDosen extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, 770, 60));
 
-        setSize(new java.awt.Dimension(993, 625));
+        setSize(new java.awt.Dimension(977, 586));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,7 @@ public class DaftarUjian extends javax.swing.JFrame {
     
     String uploadNilai, uploadLaporan;
     String nama_mhs,nim_mhs,email_mhs;
+    boolean cekdb;
     /**
      * Creates new form DaftarUjian
      */
@@ -149,7 +151,7 @@ public class DaftarUjian extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel5.setText("*input nilai harus bilangan bulat <= 100");
+        jLabel5.setText("*input nilai harus bilangan bulat <=100");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 0, 0));
@@ -351,36 +353,40 @@ public class DaftarUjian extends javax.swing.JFrame {
 
     private void btnSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitMouseClicked
         Object[] options = {"Iya","Batal"};
-                int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin Submit?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
-                if(n == JOptionPane.YES_OPTION){
+        cekAkun();
+        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin Submit?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
+            if(n == JOptionPane.YES_OPTION){
+                if(cekdb){
                     Connection con = connectdb.tryConnect();
-        PreparedStatement ps;
-        try{
-               String sql = ("insert into ujian values(?,?,?,?,?,?,?,?)");
-               ps  = con.prepareStatement(sql);
-               InputStream is1 = new FileInputStream(new File(uploadNilai));
-               InputStream is2 = new FileInputStream(new File(uploadLaporan));
-               ps.setString(1, nim_mhs);
-               ps.setString(2, nama_mhs);
-               ps.setString(3, email_mhs);
-               ps.setBlob(4,is1); 
-               ps.setString(5, txtnilai.getText());
-               ps.setBlob(6,is2);
-               ps.setString(7, "-");
-               ps.setString(8, "-");
-               
-               
-               
-               ps.executeUpdate();
-               JOptionPane.showMessageDialog(null, "Data Inserted");
-               //SendMail.sendEmail(txtemail.getText(), cv, "Curiculum Vitae");
-              
-           }catch(Exception ex){
-               JOptionPane.showMessageDialog(null, "Data not Inserted");
-           }
+                    PreparedStatement ps;
+                try{
+                    String sql = ("insert into ujian values(?,?,?,?,?,?,?,?)");
+                    ps  = con.prepareStatement(sql);
+                    InputStream is1 = new FileInputStream(new File(uploadNilai));
+                    InputStream is2 = new FileInputStream(new File(uploadLaporan));
+                    ps.setString(1, nim_mhs);
+                    ps.setString(2, nama_mhs);
+                    ps.setString(3, email_mhs);
+                    ps.setBlob(4,is1); 
+                    ps.setString(5, txtnilai.getText());
+                    ps.setBlob(6,is2);
+                    ps.setString(7, "-");
+                    ps.setString(8, "-");
+
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Data Inserted");
+                    String text = getText(nama_mhs, nim_mhs);
+
+                    SendMail mail = new SendMail();
+
+                    mail.sendEmail(email_mhs,text);  
+                   }catch(Exception ex){
+                       JOptionPane.showMessageDialog(null, "Data not Inserted");
+                   }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Akun Telah Merdaftar Ujian");
                 }
-                
-        
+            }
     }//GEN-LAST:event_btnSubmitMouseClicked
 
     public void mhslogin(){
@@ -401,6 +407,38 @@ public class DaftarUjian extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MenuDosen.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void cekAkun(){
+        try {
+            Connection conn = connectdb.tryConnect();
+            java.sql.Statement stmt = conn.createStatement();
+            String SQL = "select * from ujian";
+            java.sql.ResultSet res = stmt.executeQuery(SQL);
+            while (res.next()) {
+                String nim = res.getString("nim");
+
+                if(nim.equals(nim_mhs)){
+                    cekdb = false;
+                    break;
+                } else {
+                    cekdb = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaftarUjian.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String getText(String nama, String nim){
+     
+        String kirim = String.format("Selamat! Anda telah berhasil melakukan Pendaftaran Ujian. Berikut informasi Anda:\n" +
+    "\n" +
+    "\t\tNama\t\t\t%s\n" +
+    "\t\tNIM\t\t\t%s\n" +
+    "\nInformasi lebih lanjut akan dikirimkan ke alamat email anda.*\n\n\n*Note : Apabila terdapat kesalahan dalam penginputan, Maka anda tidak dapat mengikuti Ujian.", nama, nim);
+        
+        return kirim;
     }
     /**
      * @param args the command line arguments

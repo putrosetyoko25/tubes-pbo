@@ -78,8 +78,8 @@ public class AccountDsn extends javax.swing.JFrame {
         caridata = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        icondelete = new javax.swing.JLabel();
+        lbldelete = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -145,20 +145,20 @@ public class AccountDsn extends javax.swing.JFrame {
 
         jLabel2.setToolTipText("");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/trash-2-24.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        icondelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        icondelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/trash-2-24.png"))); // NOI18N
+        icondelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                icondeleteMouseClicked(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Delete Account");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbldelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbldelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldelete.setText("Delete Account");
+        lbldelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                lbldeleteMouseClicked(evt);
             }
         });
 
@@ -197,13 +197,13 @@ public class AccountDsn extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(570, 570, 570)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(icondelete, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel2))
-                    .addComponent(jLabel5)))
+                    .addComponent(lbldelete)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,12 +217,12 @@ public class AccountDsn extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(icondelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5)))
+                            .addComponent(lbldelete)))
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -254,7 +254,7 @@ public class AccountDsn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_caridataKeyReleased
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void icondeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icondeleteMouseClicked
         Connection con = connectdb.tryConnect();
         try
          {
@@ -267,7 +267,7 @@ public class AccountDsn extends javax.swing.JFrame {
             System.out.println("Gagal");
         } finally{
             TampilData();
-        }    }//GEN-LAST:event_jLabel4MouseClicked
+        }    }//GEN-LAST:event_icondeleteMouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         MenuAccount frm = new MenuAccount();
@@ -285,7 +285,7 @@ public class AccountDsn extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void lbldeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldeleteMouseClicked
         Connection con = connectdb.tryConnect();
         try
          {
@@ -298,7 +298,7 @@ public class AccountDsn extends javax.swing.JFrame {
             System.out.println("Gagal");
         } finally{
             TampilData();
-        }    }//GEN-LAST:event_jLabel5MouseClicked
+        }    }//GEN-LAST:event_lbldeleteMouseClicked
 
     public void cari(String key){
         Connection con = connectdb.tryConnect();
@@ -311,7 +311,7 @@ public class AccountDsn extends javax.swing.JFrame {
         
         try {
             java.sql.Statement stat = con.createStatement();
-            ResultSet res = stat.executeQuery("SELECT * from mahasiswa WHERE nama_dsn LIKE '%"+key+"%' OR email LIKE '%"+key+"%' OR password LIKE '%"+key+"%'");
+            ResultSet res = stat.executeQuery("SELECT * from dosen WHERE nama_dsn LIKE '%"+key+"%' OR email LIKE '%"+key+"%' OR password LIKE '%"+key+"%'");
             
             while(res.next()) {
                 table.addRow(new Object[]{
@@ -363,16 +363,16 @@ public class AccountDsn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField caridata;
+    private javax.swing.JLabel icondelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbldelete;
     private javax.swing.JTable tableakun;
     // End of variables declaration//GEN-END:variables
 }

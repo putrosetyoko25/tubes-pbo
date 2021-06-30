@@ -38,33 +38,17 @@ import java.util.logging.Logger;
 public class Proposal extends javax.swing.JFrame {
     
     String nama_mhs,nim_mhs,email_mhs;
-
-    /**
-     * @return the nim
-     */
-    public String getNim() {
-        return nim;
-    }
-
-    /**
-     * @param nim the nim to set
-     */
-    public void setNim(String nim) {
-        this.nim = nim;
-    }
-
-    /**
-     * @return the nim
-     */
     String cv;
     String portfolio;
     
-    private String nim;
+    boolean cekdb;
     
     public Proposal() {
         setResizable(false);
         mhslogin();
         initComponents();
+        txtcv.setEditable(false);
+        txtportfolio.setEditable(false);
     }
     
 
@@ -301,8 +285,10 @@ public class Proposal extends javax.swing.JFrame {
 
     private void btnSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSubmitMouseClicked
         Object[] options = {"Iya","Batal"};
-        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin keluar?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
+        cekAkun();
+        int n = JOptionPane.showOptionDialog(null,"Apakah anda yakin ingin Submit?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
         if(n == JOptionPane.YES_OPTION){
+            if(cekdb){
             Connection con = connectdb.tryConnect();
             PreparedStatement ps;
             try{
@@ -310,7 +296,7 @@ public class Proposal extends javax.swing.JFrame {
                 ps  = con.prepareStatement(sql);
                 InputStream is1 = new FileInputStream(new File(cv));
                 InputStream is2 = new FileInputStream(new File(portfolio));
-                //ps.setString(1, txtidproposal.getText());
+                
                 ps.setString(1, nim_mhs);
                 ps.setString(2, nama_mhs);
                 ps.setString(3, email_mhs);
@@ -324,12 +310,20 @@ public class Proposal extends javax.swing.JFrame {
                 ps.setString(9, "-");
 
                 ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Data Inserted");
+
+                String text = getText(nama_mhs, nim_mhs, txtemail.getText());
+                SendMail mail = new SendMail();
                 SendMail.sendEmail(txtemail.getText(), cv, "Curiculum Vitae");
                 SendMail.sendEmail(txtemail.getText(), portfolio, "Portfolio");
+                mail.sendEmail(email_mhs, text);
+                System.out.println(text);
+                JOptionPane.showMessageDialog(null, "Data Inserted");
 
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Data not Inserted");
+            }
+            } else {
+                JOptionPane.showMessageDialog(null, "Akun Telah Merdaftar Ujian");
             }
         }
     }//GEN-LAST:event_btnSubmitMouseClicked
@@ -401,6 +395,39 @@ public class Proposal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MenuDosen.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+   
+   public void cekAkun(){
+        try {
+            Connection conn = connectdb.tryConnect();
+            java.sql.Statement stmt = conn.createStatement();
+            String SQL = "select * from proposal";
+            java.sql.ResultSet res = stmt.executeQuery(SQL);
+            while (res.next()) {
+                String nim = res.getString("nim");
+
+                if(nim.equals(nim_mhs)){
+                    cekdb = false;
+                    break;
+                } else {
+                    cekdb = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaftarUjian.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String getText(String nama, String nim, String email_instansi){
+     
+        String kirim = String.format("Selamat! Anda telah berhasil melakukan Pengiriman CV dan/atau Portfolio ke Instansi terkait. Berikut informasi Anda:\n" +
+    "\n" +
+    "\t\tNama\t\t\t%s\n" +
+    "\t\tNIM\t\t\t%s\n" +
+    "\t\tEmail Instansi\t\t%s\n" +
+    "\nInformasi lebih lanjut akan dikirimkan ke alamat email anda.*\n\n\n*Note : Apabila terdapat kesalahan dalam penginputan, Maka anda tidak dapat mengikuti PKN.", nama, nim,email_instansi);
+        
+        return kirim;
     }
     
     /**
