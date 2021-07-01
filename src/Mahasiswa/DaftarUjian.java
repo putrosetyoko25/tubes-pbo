@@ -35,7 +35,7 @@ public class DaftarUjian extends javax.swing.JFrame {
     
     String uploadNilai, uploadLaporan;
     String nama_mhs,nim_mhs,email_mhs;
-    boolean cekdb;
+    boolean cekdb = true;
     /**
      * Creates new form DaftarUjian
      */

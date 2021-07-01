@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 public class AddMahasiswa extends javax.swing.JFrame {
 
     boolean ceknama, ceknim, ceknophone, cekemail, cekpassword, cekfinal;
-    boolean cekdb;
+    boolean cekdb = true;
     SendMail mail;
     
     public AddMahasiswa() {
@@ -300,7 +300,7 @@ public class AddMahasiswa extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(67, 67, 67))
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,10 +406,9 @@ public class AddMahasiswa extends javax.swing.JFrame {
                     ps.setString(6, txtemail.getText());
                     ps.setString(7, txtpassword.getText());
                     ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data Inserted");
                     String text = getText(txtnama.getText(), txtnim.getText(),txtnophone.getText(), txtpassword.getText());
-                    String email = txtemail.getText();
                     clear();
+                    String email = txtemail.getText();
                     mail.sendEmail(email, text);
                     JOptionPane.showMessageDialog(null, "We Sent a Mail to your account : " + email);
                     Login frm = new Login();

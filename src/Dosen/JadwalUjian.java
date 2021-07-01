@@ -82,10 +82,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +177,7 @@ public class JadwalUjian extends javax.swing.JFrame {
                         .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDownload)
-                        .addGap(167, 167, 167)
+                        .addGap(132, 132, 132)
                         .addComponent(btnAbsent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPresent)))
@@ -198,9 +195,10 @@ public class JadwalUjian extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btnAbsent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPresent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDownload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDownload, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAbsent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPresent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -208,7 +206,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 802, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -299,9 +297,10 @@ public class JadwalUjian extends javax.swing.JFrame {
                     output.write(buffer);
                 }
             }
-            output.close();
+            
             
             JOptionPane.showMessageDialog(null, "File Saved in " + file.getAbsoluteFile(), "pesan", JOptionPane.INFORMATION_MESSAGE);
+            output.close();
             
             System.out.println(file.getAbsoluteFile());
             
@@ -316,7 +315,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         Object[] options = {"Iya","Batal"};
         int n = JOptionPane.showOptionDialog(null,nama_mhs + " tidak hadir?","Perhatian!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options, options[0]); 
         if(n == JOptionPane.YES_OPTION){
-//            deleteData();
+            deleteData();
             insertArsip("Absent");
             TampilData();
         }
@@ -325,7 +324,7 @@ public class JadwalUjian extends javax.swing.JFrame {
     private void btnPresentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPresentMouseClicked
         ambilData();
         insertData();
-//        deleteData();
+        deleteData();
         insertArsip("Present");
         TampilData();
     }//GEN-LAST:event_btnPresentMouseClicked
@@ -386,7 +385,7 @@ public class JadwalUjian extends javax.swing.JFrame {
         Connection con = connectdb.tryConnect();
         try
          {
-            String sql="delete from ujian where nim='"+nim_mhs+"'";
+            String sql="update ujian set dsn_penguji='Sampun' where nim='"+nim_mhs+"'";
             PreparedStatement st=con.prepareStatement(sql);
             st.executeUpdate();
             

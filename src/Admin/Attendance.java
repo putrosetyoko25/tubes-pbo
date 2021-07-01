@@ -116,6 +116,11 @@ public class Attendance extends javax.swing.JFrame {
         btnClear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/trash-2-24.png"))); // NOI18N
         btnClear.setText("Clear Attendance");
+        btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClearMouseClicked(evt);
+            }
+        });
         btnClear.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnClearKeyPressed(evt);
@@ -226,6 +231,19 @@ public class Attendance extends javax.swing.JFrame {
     }//GEN-LAST:event_cariKeyReleased
 
     private void btnClearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnClearKeyPressed
+        
+    }//GEN-LAST:event_btnClearKeyPressed
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        MenuAdmin frm = new MenuAdmin();
+        frm.setVisible(true);
+        this.setVisible(false);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_lblBackMouseClicked
+
+    private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
+
         Connection con = connectdb.tryConnect();
         try
          {
@@ -239,15 +257,8 @@ public class Attendance extends javax.swing.JFrame {
         } finally{
             TampilData();
         }
-    }//GEN-LAST:event_btnClearKeyPressed
-
-    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
-        MenuAdmin frm = new MenuAdmin();
-        frm.setVisible(true);
-        this.setVisible(false);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_lblBackMouseClicked
+        
+    }//GEN-LAST:event_btnClearMouseClicked
 
     public void cariData(String key){
         table = new DefaultTableModel();

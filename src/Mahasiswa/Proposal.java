@@ -41,7 +41,7 @@ public class Proposal extends javax.swing.JFrame {
     String cv;
     String portfolio;
     
-    boolean cekdb;
+    boolean cekdb = true;
     
     public Proposal() {
         setResizable(false);

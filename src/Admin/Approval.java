@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +25,7 @@ public class Approval extends javax.swing.JFrame {
     
     private DefaultTableModel tableapproval;
     private String SQL; 
-    private String id_nim;
+    private String email_instansi,id_nim, id_nama, id_email;
 
     /**
      * Creates new form Approval
@@ -177,6 +179,11 @@ public class Approval extends javax.swing.JFrame {
         btnClearAtendance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnClearAtendance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/trash-2-24.png"))); // NOI18N
         btnClearAtendance.setText("Clear Attendance");
+        btnClearAtendance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClearAtendanceMouseClicked(evt);
+            }
+        });
         btnClearAtendance.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnClearAtendanceKeyPressed(evt);
@@ -187,6 +194,11 @@ public class Approval extends javax.swing.JFrame {
         btnDecline.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnDecline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/x-mark-5-24.png"))); // NOI18N
         btnDecline.setText("Decline");
+        btnDecline.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeclineMouseClicked(evt);
+            }
+        });
         btnDecline.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnDeclineKeyPressed(evt);
@@ -279,7 +291,10 @@ public class Approval extends javax.swing.JFrame {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         
         int baris = table.getSelectedRow(); 
+        email_instansi = tableapproval.getValueAt(baris, 0).toString();
         id_nim = tableapproval.getValueAt(baris, 1).toString();
+        id_nama = tableapproval.getValueAt(baris, 2).toString();
+        id_email = tableapproval.getValueAt(baris, 3).toString();
         
     }//GEN-LAST:event_tableMouseClicked
 
@@ -311,6 +326,31 @@ public class Approval extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReceiveKeyPressed
 
     private void btnClearAtendanceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnClearAtendanceKeyPressed
+        
+    }//GEN-LAST:event_btnClearAtendanceKeyPressed
+
+    private void btnDeclineKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDeclineKeyPressed
+             
+    }//GEN-LAST:event_btnDeclineKeyPressed
+
+    private void btnApproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseClicked
+        try {
+            Connection conn = connectdb.tryConnect();
+            PreparedStatement stmt = conn.prepareStatement("update proposal set status='Approve' where nim='"+id_nim+"'");
+            stmt.executeUpdate();
+            String text = getText(email_instansi, id_nama,id_nim,"Approve");
+            SendMail mail = new SendMail();
+            TampilData();
+            mail.sendEmail(id_email, text);
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(Approval.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }//GEN-LAST:event_btnApproveMouseClicked
+
+    private void btnClearAtendanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearAtendanceMouseClicked
         Connection con = connectdb.tryConnect();
         try
          {
@@ -324,31 +364,24 @@ public class Approval extends javax.swing.JFrame {
         } finally{
             TampilData();
         }
-    }//GEN-LAST:event_btnClearAtendanceKeyPressed
+    }//GEN-LAST:event_btnClearAtendanceMouseClicked
 
-    private void btnDeclineKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDeclineKeyPressed
+    private void btnDeclineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeclineMouseClicked
         try {
             Connection conn = connectdb.tryConnect();
             PreparedStatement stmt = conn.prepareStatement("update proposal set status='Decline' where nim='"+id_nim+"'");
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            String text = getText(email_instansi, id_nama,id_nim,"Decline");
+            SendMail mail = new SendMail();
             TampilData();
+            mail.sendEmail(id_email, text);
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }        
-    }//GEN-LAST:event_btnDeclineKeyPressed
-
-    private void btnApproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseClicked
-        try {
-            Connection conn = connectdb.tryConnect();
-            PreparedStatement stmt = conn.prepareStatement("update proposal set status='Approve' where nim='"+id_nim+"'");
-            stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
-            TampilData();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }        
-    }//GEN-LAST:event_btnApproveMouseClicked
+        } catch (Exception ex) {
+            Logger.getLogger(Approval.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }//GEN-LAST:event_btnDeclineMouseClicked
 
     public void cariData(String key){
         tableapproval = new DefaultTableModel();
@@ -376,6 +409,19 @@ public class Approval extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public String getText(String email_instansi, String nama, String nim, String status){
+     
+        String kirim = String.format("Update Informasi status Praktik Kerja Nyata. Berikut informasi Anda:\n" +
+    "\n" +
+    "\t\tEmail Instansi\t\t%s\n" +
+    "\t\tNama\t\t\t%s\n" +
+    "\t\tNIM\t\t\t%s\n" +
+    "\t\tStatus\t\t\t%s\n" +
+    "\nSelamat bagi anda yang lolos, jangan berkecil hati bagi anda yang belum lolos.\nGood Luck!!!", email_instansi, nama, nim, status);
+        
+        return kirim;
     }
     
     /**

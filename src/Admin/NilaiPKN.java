@@ -159,6 +159,11 @@ public class NilaiPKN extends javax.swing.JFrame {
         btnClear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/trash-2-24.png"))); // NOI18N
         btnClear.setText("Clear Nilai");
+        btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClearMouseClicked(evt);
+            }
+        });
         btnClear.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnClearKeyPressed(evt);
@@ -169,6 +174,11 @@ public class NilaiPKN extends javax.swing.JFrame {
         btnSend.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnSend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Red Vol.2/telegram-24.png"))); // NOI18N
         btnSend.setText("Send Mail");
+        btnSend.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSendMouseClicked(evt);
+            }
+        });
         btnSend.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnSendKeyPressed(evt);
@@ -271,6 +281,14 @@ public class NilaiPKN extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBackMouseClicked
 
     private void btnClearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnClearKeyPressed
+        
+    }//GEN-LAST:event_btnClearKeyPressed
+
+    private void btnSendKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSendKeyPressed
+         
+    }//GEN-LAST:event_btnSendKeyPressed
+
+    private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
         Connection con = connectdb.tryConnect();
         try
          {
@@ -284,23 +302,24 @@ public class NilaiPKN extends javax.swing.JFrame {
         } finally{
             TampilData();
         }       
-    }//GEN-LAST:event_btnClearKeyPressed
+    }//GEN-LAST:event_btnClearMouseClicked
 
-    private void btnSendKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSendKeyPressed
+    private void btnSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSendMouseClicked
         try {
             SendMail mail = new SendMail();
             Connection conn = connectdb.tryConnect();
             PreparedStatement stmt = conn.prepareStatement("update nilai set status='Sended' where nim='"+id_nim+"'");
             stmt.executeUpdate();
             String text = getText(id_nama,id_nim,id_nilaiP,id_nilaiD,id_nilaifix);
-            mail.sendEmail(id_email, text);
             TampilData();
+            mail.sendEmail(id_email, text);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (Exception ex) {
             Logger.getLogger(NilaiPKN.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-    }//GEN-LAST:event_btnSendKeyPressed
+        }       
+        
+    }//GEN-LAST:event_btnSendMouseClicked
 
     public void cariData(String key){
         tableadmin = new DefaultTableModel();
@@ -341,8 +360,8 @@ public class NilaiPKN extends javax.swing.JFrame {
     "\t\tNama Mahasiswa\t\t%s\n" +
     "\t\tNIM Mahasiswa\t\t%s\n" +
     "\t\tNilai Perusahaan\t%s\n" +
-    "\t\tNilai Ujian\t\t%s\n" +
-    "\t\tNilai Final\t\t%s\n" +
+    "\t\tNilai Ujian\t\t\t%s\n" +
+    "\t\tNilai Final\t\t\t%s\n" +
     "Gunakan Username dan Password untuk proses login Aplikasi Sistem PKN.", nama, nim,nilai1, nilai2, nilai3);
         
         return kirim;

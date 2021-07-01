@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Admin;
+import Fitur.SendMail;
 import Main.MenuAdmin;
 import config.connectdb;
 import java.io.File;
@@ -33,7 +34,7 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
     
     private DefaultTableModel tableujian;
     private String SQL; 
-    String nim;
+    String nim, id_email,id_nama;
     
     public PenjadwalanUjian() {
         setResizable(false);
@@ -267,6 +268,9 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         int baris = table.getSelectedRow(); 
         nim = tableujian.getValueAt(baris, 0).toString();
+        id_nama = tableujian.getValueAt(baris, 1).toString();
+        id_email = tableujian.getValueAt(baris, 2).toString();
+        
     }//GEN-LAST:event_tableMouseClicked
 
     private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
@@ -289,10 +293,22 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
             Connection conn = connectdb.tryConnect();
             PreparedStatement stmt = conn.prepareStatement("update ujian set date='"+tanggal+"', dsn_penguji='"+ cmbdsn.getSelectedItem().toString() + "' where nim='"+ nim +"'");
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+            
+            if(cmbdsn.getSelectedItem().toString().equals("Blokir")){
+                tanggal = "00-00-0000";
+            }
+            
+            String text = getText(id_nama, nim,tanggal,cmbdsn.getSelectedItem().toString());
+            System.out.println(text);
+            SendMail mail = new SendMail();
+            
             TampilData();
+            
+            mail.sendEmail(id_email, text);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(PenjadwalanUjian.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }//GEN-LAST:event_btnUpdateMouseClicked
 
@@ -327,6 +343,19 @@ public class PenjadwalanUjian extends javax.swing.JFrame {
             ex.printStackTrace();
         } 
         
+    }
+    
+    public String getText(String nama, String nim, String date, String nama_dsn){
+     
+        String kirim = String.format("Informasi! Penjadwalan Ujian telah di update. Berikut informasi Anda:\n" +
+    "\n" +
+    "\t\tNama\t\t\t%s\n" +
+    "\t\tNIM\t\t\t%s\n" +
+    "\t\tDate\t\t\t%s (mm-dd-yyyy)\n" +
+    "\t\tDosen Penguji\t%s\n" +
+    "\nGood Luck.", nama, nim,date, nama_dsn);
+        
+        return kirim;
     }
     
     /**
