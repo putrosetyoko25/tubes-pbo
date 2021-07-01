@@ -26,6 +26,34 @@ import java.util.logging.Logger;
  * @author H P
  */
 public class Login extends javax.swing.JFrame {
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
     
     /**
@@ -36,7 +64,10 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         createFolder();
     }
-
+       
+    private String username;
+    private String password;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,12 +155,25 @@ public class Login extends javax.swing.JFrame {
         txtpassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtpassword.setAlignmentX(0.0F);
         txtpassword.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtpasswordKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 226, 33));
 
         txtusername.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         txtusername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtusername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtusername.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        txtusername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtusernameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtusernameKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 226, 33));
 
         btnlogin.setBackground(new java.awt.Color(153, 0, 0));
@@ -269,9 +313,9 @@ public class Login extends javax.swing.JFrame {
         try {
             java.sql.Statement stat = con.createStatement();
             ResultSet result=stat.executeQuery ("select * from mahasiswa where "
-                    + "nim='" +txtusername.getText()+"'");
+                    + "nim='" +getUsername()+"'");
             if (result.next()) {
-                if (txtpassword.getText().equals(result.getString("password"))){
+                if (getPassword().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
                     mhslogin(result);
                     MenuMahasiswa frm = new MenuMahasiswa();
@@ -287,7 +331,7 @@ public class Login extends javax.swing.JFrame {
             } else {
                 
                 result=stat.executeQuery ("select * from dosen where "
-                    + "email='" +txtusername.getText()+"'");
+                    + "email='" +getUsername()+"'");
                 
                 if (result.next()) {
                 if (txtpassword.getText().equals(result.getString("password"))){
@@ -306,7 +350,7 @@ public class Login extends javax.swing.JFrame {
             } else {
                     
                     result=stat.executeQuery ("select * from admin where "
-                    + "username='" +txtusername.getText()+"'");
+                    + "username='" +getUsername()+"'");
                     
                     if (result.next()) {
                 if (txtpassword.getText().equals(result.getString("password"))){
@@ -382,13 +426,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void btnloginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnloginKeyPressed
+        setUsername(txtusername.getText());
+        setPassword(txtpassword.getText());
+        
         Connection con = connectdb.tryConnect();
         try {
             java.sql.Statement stat = con.createStatement();
             ResultSet result=stat.executeQuery ("select * from mahasiswa where "
-                    + "nim='" +txtusername.getText()+"'");
+                    + "nim='" +getUsername()+"'");
             if (result.next()) {
-                if (txtpassword.getText().equals(result.getString("password"))){
+                if (getPassword().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
                     mhslogin(result);
                     MenuMahasiswa frm = new MenuMahasiswa();
@@ -404,10 +451,10 @@ public class Login extends javax.swing.JFrame {
             } else {
                 
                 result=stat.executeQuery ("select * from dosen where "
-                    + "email='" +txtusername.getText()+"'");
+                    + "email='" +getUsername()+"'");
                 
                 if (result.next()) {
-                if (txtpassword.getText().equals(result.getString("password"))){
+                if (getPassword().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
                     dsnlogin(result);
                     MenuDosen frm = new MenuDosen();
@@ -423,10 +470,10 @@ public class Login extends javax.swing.JFrame {
             } else {
                     
                     result=stat.executeQuery ("select * from admin where "
-                    + "username='" +txtusername.getText()+"'");
+                    + "username='" +getUsername()+"'");
                     
                     if (result.next()) {
-                if (txtpassword.getText().equals(result.getString("password"))){
+                if (getPassword().equals(result.getString("password"))){
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
                 
                     MenuAdmin frm = new MenuAdmin();
@@ -455,6 +502,18 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnloginKeyPressed
+
+    private void txtusernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusernameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusernameKeyPressed
+
+    private void txtusernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusernameKeyReleased
+        
+    }//GEN-LAST:event_txtusernameKeyReleased
+
+    private void txtpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyReleased
+        
+    }//GEN-LAST:event_txtpasswordKeyReleased
 
     public void mhslogin(ResultSet set) throws IOException, SQLException{
         String nama = set.getString("nama");

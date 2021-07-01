@@ -356,19 +356,7 @@ public class AddAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBack;
-    private javax.swing.JLabel btnSubmit;
-    private javax.swing.JLabel btnSubmit1;
-    private javax.swing.JLabel btnSubmit10;
-    private javax.swing.JLabel btnSubmit11;
     private javax.swing.JLabel btnSubmit12;
-    private javax.swing.JLabel btnSubmit2;
-    private javax.swing.JLabel btnSubmit3;
-    private javax.swing.JLabel btnSubmit4;
-    private javax.swing.JLabel btnSubmit5;
-    private javax.swing.JLabel btnSubmit6;
-    private javax.swing.JLabel btnSubmit7;
-    private javax.swing.JLabel btnSubmit8;
-    private javax.swing.JLabel btnSubmit9;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
